@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/path_provider_android/intermediates/res/merged/debug/values-cs/values-cs.xml",
+            "map": [
+                {
+                    "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values-cs/values-cs.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/path_provider_android/intermediates/incremental/mergeDebugResources/merged.dir/values-cs/values-cs.xml",
+            "map": [
+                {
+                    "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values-cs/values-cs.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

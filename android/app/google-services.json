@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "463311071830",
+    "project_id": "rieleraapp",
+    "storage_bucket": "rieleraapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463311071830:android:52dd50a4cad38909b129f7",
+        "android_client_info": {
+          "package_name": "com.example.rielera_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463311071830-1otti2oq7h8n02dt3mv1g75bi1qugccu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rielera_app",
+            "certificate_hash": "62d0db062e8e79116a72dc60309748ede5f07ac7"
+          }
+        },
+        {
+          "client_id": "463311071830-pr2os2tb0cu05lad4i01638ntjhacf9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6D_kdWv0DqPO_uEsqb-WeouzwuoUf_wU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463311071830-pdb106jennfi6t229nu0f5u842dqpadh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

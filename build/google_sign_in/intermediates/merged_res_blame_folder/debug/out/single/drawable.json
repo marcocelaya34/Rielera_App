@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_normal.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_focused.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_normal.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_light_normal.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_normal.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_disabled.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_disabled.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_focused.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/notification_bg.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_normal.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_light_normal.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_dark.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_focused.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_light_focused.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_disabled.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_icon_disabled.xml"
+    },
+    {
+        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_focused.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/887c1990a8e6502a0ea483675c8b76f8/jetified-play-services-base-16.0.1/res/drawable/common_google_signin_btn_text_light_focused.xml"
+    }
+]
