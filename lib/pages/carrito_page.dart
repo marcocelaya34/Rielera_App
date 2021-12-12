@@ -64,15 +64,15 @@ class _CarritoPageState extends State<CarritoPage> {
                   ),
                 ),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        articulos.isNotEmpty
-                            ? ListView.builder(
+                  child: articulos.isNotEmpty
+                      ? SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: articulos.length,
@@ -82,60 +82,65 @@ class _CarritoPageState extends State<CarritoPage> {
                                       articulos[index]['imagen'],
                                       articulos[index]['cantidad']);
                                 },
-                              )
-                            : SizedBox(),
-                        getTotal() != 0
-                            ? Container(
-                                //color: Colors.amber,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('TOTAL: MXN\$${getTotal()}',
-                                        textAlign: TextAlign.start,
-                                        style: GoogleFonts.montserrat(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 20)),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        List<Map<String, dynamic>> empty = [];
-                                        providerCarrito.setArticulos = empty;
-                                        mostrarQR(context, articulos);
-                                        setState(() {});
-                                      },
-                                      child: Container(
-                                        width: double.maxFinite,
-                                        height: 60,
-                                        alignment: Alignment.center,
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 30),
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          border: Border.all(
-                                              color: Colors.white, width: 1),
-                                        ),
-                                        child: Text('GENERAR QR',
-                                            style: GoogleFonts.montserrat(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 15)),
+                              ),
+                              getTotal() != 0
+                                  ? Container(
+                                      //color: Colors.amber,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('TOTAL: MXN\$${getTotal()}',
+                                              textAlign: TextAlign.start,
+                                              style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: 20)),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              List<Map<String, dynamic>> empty =
+                                                  [];
+                                              providerCarrito.setArticulos =
+                                                  empty;
+                                              mostrarQR(context, articulos);
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: double.maxFinite,
+                                              height: 60,
+                                              alignment: Alignment.center,
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 30),
+                                              decoration: BoxDecoration(
+                                                color: Colors.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 1),
+                                              ),
+                                              child: Text('GENERAR QR',
+                                                  style: GoogleFonts.montserrat(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontSize: 15)),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                    )
+                                  : SizedBox(),
+                              SizedBox(
+                                height: 200,
                               )
-                            : SizedBox(),
-                        SizedBox(
-                          height: 200,
+                            ],
+                          ),
                         )
-                      ],
-                    ),
-                  ),
+                      : emptyCar(),
                 ),
               ],
             ),
@@ -299,5 +304,34 @@ class _CarritoPageState extends State<CarritoPage> {
     }
 
     return total;
+  }
+
+  Widget emptyCar() {
+    MediaQueryData queryData = MediaQuery.of(context);
+    double alto = queryData.size.height;
+
+    return Container(
+      height: alto * 0.9,
+      width: double.maxFinite,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/shopping-cart.png',
+            scale: 4,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: Text('Tu carrito aún sigue vacío',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 20)),
+          ),
+        ],
+      ),
+    );
   }
 }

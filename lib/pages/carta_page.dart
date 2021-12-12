@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,46 +18,13 @@ final PageController controller = PageController(initialPage: 0);
 
 class _CartaDigitalPageState extends State<CartaDigitalPage> {
   String busqueda = '';
-
+  String filterCard = 'Desayunos';
   String categoria = '';
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
-    /*   double alto = queryData.size.height; */
     double ancho = queryData.size.width;
-    List<List<dynamic>> carta = [
-      ['Clamato', '01_clamato.png', 'Descripcion'],
-      ['XX', '02_XX.png', 'Descripcion'],
-      ['Bohemia', '03_bohemia.png', 'Descripcion'],
-      ['Mojito', '04_mojito.png', 'Descripcion'],
-      ['Tecate', '05_tecate.png', 'Descripcion'],
-      ['Heineken', '06_heineken.png', 'Descripcion'],
-      ['Ultra', '07_ultra.png', 'Descripcion'],
-      ['Tecate-Light', '08_tecate_light.png', 'Descripcion'],
-      ['Shots', '09_shots.png', 'Descripcion'],
-      ['Cubeta-de-Cervezas', '10_cubeta_de_cervezas.png', 'Descripcion'],
-      ['Mojito-Ultra', '11_mojito_ultra.png', 'Descripcion'],
-      ['Margarita', '12_margarita.png', 'Descripcion'],
-      ['Mojito-Black', '13_mojito_black.png', 'Descripcion'],
-      ['Sunrise', '15_sunrise.png', 'Descripcion'],
-      ['Mojito-Clasico', '16_mojito_clasico.png', 'Descripcion'],
-      ['Chilaquiles', '17_chilaquiles.png', 'Descripcion'],
-      ['Tostada-de-Tinga', '18_tostada_de_tinga.png', 'Descripcion'],
-      ['Pozole', '19_pozole.png', 'Descripcion'],
-      ['MargaChela', '20_margachela.png', 'Descripcion'],
-      ['Malteada-de-vainilla', '21_maltedad_de_vainilla.png', 'Descripcion'],
-      ['Tacos-de-Bistek', '22_tacos_de_bistek.png', 'Descripcion'],
-      ['Papas-a-la-francesa', '23_papas_a_la_francesa.png', 'Descripcion'],
-      [
-        'Enchiladas',
-        '24_Enchiladas_Suizas_Rojas.png',
-        'Deliciosas enchiladas rojas al gusto',
-      ],
-      ['Caldo-de-Carne', '25_caldo_de_carne.png', 'Descripcion'],
-      ['Salchipulpos', '26_salchipulpos.png', 'Descripcion'],
-      ['Tacos-Campechanos', '27_tacos_campechanos.png', 'descripcion']
-    ];
 
     return Scaffold(
       body: Container(
@@ -70,281 +38,290 @@ class _CartaDigitalPageState extends State<CartaDigitalPage> {
               Colors.black,
             ],
           )),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 60,
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('DISFRUTA DE',
-                          textAlign: TextAlign.start,
-                          style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w200,
-                              fontSize: 20)),
-                      Row(
-                        children: [
-                          Text('NUESTRO AMPLIO',
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w200,
-                                  fontSize: 24)),
-                          Text(' MENÚ !',
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 24)),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                    padding: EdgeInsets.only(left: 30, right: 30),
-                    margin: EdgeInsets.only(left: 30, right: 30),
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.white),
-                    child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 60,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('DISFRUTA DE',
+                        textAlign: TextAlign.start,
+                        style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w200,
+                            fontSize: 20)),
+                    Row(
                       children: [
-                        Flexible(
-                            flex: 9,
-                            child: TextField(
-                              onChanged: (value) {
-                                busqueda = value;
-                                setState(() {});
-                              },
-                              style: GoogleFonts.roboto(),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                            )),
-                        Flexible(
-                            flex: 1,
-                            child: Container(
-                                height: 50, child: Icon(LineIcons.search)))
+                        Text('NUESTRO AMPLIO',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w200,
+                                fontSize: 24)),
+                        Text(' MENÚ !',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 24)),
                       ],
-                    )),
-                SizedBox(
-                  height: 30,
+                    )
+                  ],
                 ),
-                /* Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(bottom: 40),
-                  child: ToggleSwitch(
-                    initialLabelIndex: 0,
-                    totalSwitches: 2,
-                    activeBgColor: [Colors.white],
-                    inactiveBgColor: Colors.black,
-                    inactiveFgColor: Colors.white,
-                    activeFgColor: Colors.black,
-                    labels: ['RA', 'STDR'],
-                    onToggle: (index) {
-                      controller.jumpToPage(index);
-                    },
-                  ),
-                ), */
-                Container(
-                  height: 550,
-                  child: PageView(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    children: <Widget>[
-                      /* Container(
-                          height: 450,
-                          margin: EdgeInsets.only(bottom: 80),
-                          width: double.maxFinite,
-                          child: StaggeredGridView.countBuilder(
-                            crossAxisCount: 4,
-                            padding: EdgeInsets.only(left: 5, right: 5),
-                            scrollDirection: Axis.vertical,
-                            itemCount: carta.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return cardPlatilloRA(
-                                  carta[index][0],
-                                  carta[index][1],
-                                  carta[index][2],
-                                  index.toString());
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                  padding: EdgeInsets.only(left: 30, right: 30),
+                  margin: EdgeInsets.only(left: 30, right: 30),
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.white),
+                  child: Row(
+                    children: [
+                      Flexible(
+                          flex: 9,
+                          child: TextField(
+                            onChanged: (value) {
+                              busqueda = value;
+                              setState(() {});
                             },
-                            staggeredTileBuilder: (int index) {
-                              if (ancho > 760) {
-                                return new StaggeredTile.count(2, 1);
-                              } else {
-                                return new StaggeredTile.count(2, 2.3);
-                              }
-                            },
-                            mainAxisSpacing: 20.0,
-                            crossAxisSpacing: 20.0,
-                          )), */
-                      Container(
-                        height: 550,
-                        margin: EdgeInsets.only(bottom: 80),
-                        width: double.maxFinite,
-                        child: FutureBuilder(
-                          future: fetchPlatillos(),
+                            style: GoogleFonts.roboto(),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                            ),
+                          )),
+                      Flexible(
+                          flex: 1,
+                          child: Container(
+                              height: 50, child: Icon(LineIcons.search)))
+                    ],
+                  )),
+              SizedBox(
+                height: 30,
+              ),
+              FutureBuilder(
+                future: fetchCateogorias(),
+                initialData: 'waiting',
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == 'waiting') {
+                    return Center(
+                      child: SizedBox(
+                        height: 40,
+                      ),
+                    );
+                  } else {
+                    if (snapshot.data != null) {
+                      List<dynamic> list = json.decode(snapshot.data.body);
+                      print(list);
+                      return CustomRadioButton(
+                        elevation: 0,
+                        radius: 500,
+                        absoluteZeroSpacing: false,
+                        unSelectedColor: Colors.white,
+                        autoWidth: true,
+                        enableShape: true,
+                        defaultSelected: 'Desayunos',
+                        customShape: StadiumBorder(),
+                        buttonLables: list
+                            .map<String>((e) => e['Nombre_categoria'])
+                            .toList(),
+                        buttonValues: list
+                            .map<String>((e) => e['Nombre_categoria'])
+                            .toList(),
+                        unSelectedBorderColor: Colors.transparent,
+                        selectedBorderColor: Colors.transparent,
+                        buttonTextStyle: ButtonTextStyle(
+                            selectedColor: Colors.white,
+                            unSelectedColor: Colors.black,
+                            textStyle: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w200,
+                                fontSize: 14)),
+                        radioButtonValue: (value) {
+                          print(value);
+                          filterCard = value.toString();
+                          setState(() {});
+                        },
+                        selectedColor: Colors.black,
+                      );
+                    } else {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(28.0),
+                          child: Text(
+                              'Uppss, el servidor se cayo, no podemos mostrar las categorias',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15)),
+                        ),
+                      );
+                    }
+                  }
+                },
+              ),
+              Expanded(
+                child: FutureBuilder(
+                  future: fetchPlatillos(),
+                  initialData: 'waiting',
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == 'waiting') {
+                      return loaderCarta();
+                    } else {
+                      if (snapshot.data != null) {
+                        return FutureBuilder(
+                          future: fetchCateogorias(),
                           initialData: 'waiting',
                           builder:
-                              (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.data == 'waiting') {
-                              return Center(child: CircularProgressIndicator());
-                            } else {
-                              return FutureBuilder(
-                                future: fetchCateogorias(),
-                                initialData: 'waiting',
-                                builder: (BuildContext context,
-                                    AsyncSnapshot snapshot2) {
-                                  if (snapshot2.data != 'waiting') {
-                                    List<dynamic> categorias =
-                                        jsonDecode(snapshot2.data.body);
-                                    List<dynamic> platillos =
-                                        jsonDecode(snapshot.data.body);
-                                    List<List<dynamic>> platillosxCategoria =
-                                        [];
+                              (BuildContext context, AsyncSnapshot snapshot2) {
+                            if (snapshot2.data != 'waiting') {
+                              List<dynamic> categorias =
+                                  jsonDecode(snapshot2.data.body);
+                              List<dynamic> platillos =
+                                  jsonDecode(snapshot.data.body);
+                              List<List<dynamic>> platillosxCategoria = [];
 
-                                    for (var item in categorias) {
-                                      platillosxCategoria.add(platillos
-                                          .where((element) =>
-                                              element['id_Categoria'] ==
-                                              item['id_Categoria'])
-                                          .toList());
+                              for (var item in categorias) {
+                                platillosxCategoria.add(platillos
+                                    .where((element) =>
+                                        element['id_Categoria'] ==
+                                        item['id_Categoria'])
+                                    .toList());
+                              }
+
+                              bool existePlatillo = false;
+                              String id = '';
+                              String nombre = '';
+                              String imagen = '';
+
+                              if (busqueda != '' && existePlatillo == false) {
+                                for (var item in platillosxCategoria) {
+                                  for (var item2 in item) {
+                                    if (item2['Nombre_platillo']
+                                            .toLowerCase() ==
+                                        busqueda.toLowerCase()) {
+                                      id = item2['id_Platillo'].toString();
+                                      nombre = item2['Nombre_platillo'];
+                                      imagen = item2['Video_RA'];
+                                      categoria =
+                                          item2['id_Categoria'].toString();
+                                      existePlatillo = true;
                                     }
-
-                                    bool existePlatillo = false;
-                                    String id = '';
-                                    String nombre = '';
-                                    String imagen = '';
-
-                                    if (busqueda != '' &&
-                                        existePlatillo == false) {
-                                      for (var item in platillosxCategoria) {
-                                        for (var item2 in item) {
-                                          if (item2['Nombre_platillo']
-                                                  .toLowerCase() ==
-                                              busqueda.toLowerCase()) {
-                                            id =
-                                                item2['id_Platillo'].toString();
-                                            nombre = item2['Nombre_platillo'];
-                                            imagen = item2['Video_RA'];
-                                            categoria = item2['id_Categoria']
-                                                .toString();
-                                            existePlatillo = true;
-                                          }
-                                        }
-                                      }
-                                    } else {
-                                      existePlatillo = false;
-                                    }
-
-                                    return !existePlatillo
-                                        ? ListView.builder(
-                                            itemCount:
-                                                platillosxCategoria.length,
-                                            itemBuilder: (context, index) {
-                                              return Column(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 60),
-                                                    child: Text(
-                                                        '${categorias[index]['Nombre_categoria']}',
-                                                        style: GoogleFonts
-                                                            .montserrat(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w200,
-                                                                fontSize: 30)),
-                                                  ),
-                                                  StaggeredGridView
-                                                      .countBuilder(
-                                                    shrinkWrap: true,
-                                                    physics:
-                                                        ClampingScrollPhysics(),
-                                                    crossAxisCount: 4,
-                                                    padding: EdgeInsets.only(
-                                                        left: 5, right: 5),
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemCount:
-                                                        platillosxCategoria[
-                                                                index]
-                                                            .length,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index2) {
-                                                      return cardPlatillo(
-                                                          platillosxCategoria[
-                                                                      index]
-                                                                  [index2]
-                                                              [
-                                                              'Nombre_platillo'],
-                                                          platillosxCategoria[
-                                                                  index][index2]
-                                                              ['Video_RA'],
-                                                          '',
-                                                          platillosxCategoria[
-                                                                          index]
-                                                                      [index2][
-                                                                  'id_Categoria']
-                                                              .toString(),
-                                                          platillosxCategoria[
-                                                                          index]
-                                                                      [index2][
-                                                                  'id_Platillo']
-                                                              .toString());
-                                                    },
-                                                    staggeredTileBuilder:
-                                                        (int index) {
-                                                      if (ancho > 1000) {
-                                                        return new StaggeredTile
-                                                            .count(1, .5);
-                                                      } else if ((ancho >
-                                                          800)) {
-                                                        return new StaggeredTile
-                                                            .count(1, 1);
-                                                      } else if ((ancho > 50)) {
-                                                        return new StaggeredTile
-                                                            .count(2, 2.3);
-                                                      }
-                                                    },
-                                                    mainAxisSpacing: 20.0,
-                                                    crossAxisSpacing: 20.0,
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          )
-                                        : cardPlatillo(nombre, imagen,
-                                            'descripcion', categoria, id);
-                                  } else {
-                                    return Center(
-                                        child: CircularProgressIndicator());
                                   }
-                                },
-                              );
+                                }
+                              } else {
+                                existePlatillo = false;
+                              }
+
+                              return !existePlatillo
+                                  ? ListView.builder(
+                                      itemCount: platillosxCategoria.length,
+                                      itemBuilder: (context, index) {
+                                        if (filterCard ==
+                                            categorias[index]
+                                                ['Nombre_categoria']) {
+                                          return Column(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(bottom: 60),
+                                                child: Text(
+                                                    '${categorias[index]['Nombre_categoria']}',
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w200,
+                                                            fontSize: 30)),
+                                              ),
+                                              StaggeredGridView.countBuilder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                crossAxisCount: 4,
+                                                padding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                scrollDirection: Axis.vertical,
+                                                itemCount:
+                                                    platillosxCategoria[index]
+                                                        .length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index2) {
+                                                  return cardPlatillo(
+                                                      platillosxCategoria[index]
+                                                              [index2]
+                                                          ['Nombre_platillo'],
+                                                      platillosxCategoria[index]
+                                                          [index2]['Video_RA'],
+                                                      '',
+                                                      platillosxCategoria[index]
+                                                                  [index2]
+                                                              ['id_Categoria']
+                                                          .toString(),
+                                                      platillosxCategoria[index]
+                                                                  [index2]
+                                                              ['id_Platillo']
+                                                          .toString());
+                                                },
+                                                staggeredTileBuilder:
+                                                    (int index) {
+                                                  if (ancho > 1000) {
+                                                    return new StaggeredTile
+                                                        .count(1, .5);
+                                                  } else if ((ancho > 800)) {
+                                                    return new StaggeredTile
+                                                        .count(1, 1);
+                                                  } else if ((ancho > 50)) {
+                                                    return new StaggeredTile
+                                                        .count(2, 2.3);
+                                                  }
+                                                },
+                                                mainAxisSpacing: 20.0,
+                                                crossAxisSpacing: 20.0,
+                                              ),
+                                            ],
+                                          );
+                                        } else {
+                                          return SizedBox();
+                                        }
+                                      },
+                                    )
+                                  : cardPlatillo(nombre, imagen, 'descripcion',
+                                      categoria, id);
+                            } else {
+                              return loaderCarta();
                             }
                           },
-                        ),
-                      ),
-                    ],
-                  ),
+                        );
+                      } else {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(28.0),
+                            child: Text(
+                                'Uppss, el servidor se cayo, no podemos mostrar la carta',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15)),
+                          ),
+                        );
+                      }
+                    }
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           )),
     );
   }
@@ -413,6 +390,45 @@ class _CartaDigitalPageState extends State<CartaDigitalPage> {
     );
   }
 
+  Widget cardPlatilloLoader() {
+    return Column(
+      children: [
+        Center(
+            child: Container(
+          height: 100,
+          width: 100,
+          padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            height: 10,
+            width: 10,
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20)),
+          ),
+        )),
+        Container(
+          padding: EdgeInsets.only(left: 0, right: 0, top: 10, bottom: 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 20,
+                width: double.maxFinite,
+                margin: EdgeInsets.only(right: 5),
+                decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(5)),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget cardPlatilloRA(
       String nombre, String imagen, String descripcion, String index) {
     return InkWell(
@@ -474,34 +490,63 @@ class _CartaDigitalPageState extends State<CartaDigitalPage> {
       ),
     );
   }
+
+  Widget loaderCarta() {
+    MediaQueryData queryData = MediaQuery.of(context);
+    double ancho = queryData.size.width;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: 30,
+            width: 300,
+            margin: EdgeInsets.only(top: 35, bottom: 60),
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(5)),
+          ),
+          StaggeredGridView.countBuilder(
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            crossAxisCount: 4,
+            padding: EdgeInsets.only(left: 5, right: 5),
+            scrollDirection: Axis.vertical,
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int index2) {
+              return cardPlatilloLoader();
+            },
+            staggeredTileBuilder: (int index) {
+              if (ancho > 1000) {
+                return new StaggeredTile.count(1, .5);
+              } else if ((ancho > 800)) {
+                return new StaggeredTile.count(1, 1);
+              } else if ((ancho > 50)) {
+                return new StaggeredTile.count(2, 2.3);
+              }
+            },
+            mainAxisSpacing: 20.0,
+            crossAxisSpacing: 20.0,
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-Future<http.Response> fetchPlatillos() {
-  return http.get(
-      Uri.parse('https://luisrojas24.pythonanywhere.com/get-platillos'),
-      headers: {
-        'Access-Control-Allow-Origin':
-            '*', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-//        'Access-Control-Allow-Origin':'http://localhost:5000/', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-
-        "Access-Control-Allow-Methods":
-            "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-        "Access-Control-Allow-Headers":
-            "Origin, X-Requested-With, Content-Type, Accept"
-      });
+Future<http.Response> fetchPlatillos() async {
+  print('HOLA');
+  var response = await http.get(
+    Uri.parse('https://luisrojas24.pythonanywhere.com/get-platillos'),
+  );
+  print(response.body);
+  return response;
 }
 
-Future<http.Response> fetchCateogorias() {
-  return http.get(
-      Uri.parse('https://luisrojas24.pythonanywhere.com/get-categorias'),
-      headers: {
-        'Access-Control-Allow-Origin':
-            '*', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-//        'Access-Control-Allow-Origin':'http://localhost:5000/', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-
-        "Access-Control-Allow-Methods":
-            "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-        "Access-Control-Allow-Headers":
-            "Origin, X-Requested-With, Content-Type, Accept"
-      });
+Future<http.Response> fetchCateogorias() async {
+  var response = await http.get(
+    Uri.parse('https://luisrojas24.pythonanywhere.com/get-categorias'),
+  );
+  print(response.body);
+  return response;
 }

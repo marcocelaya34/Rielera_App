@@ -65,10 +65,8 @@ class _PedidosPageState extends State<PedidosPage> {
                   initialData: 'waiting',
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data == 'waiting') {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
+                      return loaderPedidos();
+                    } else if (snapshot.data != null) {
                       List<dynamic> ordenes = json.decode(snapshot.data.body);
                       List<List<dynamic>> pedidos = [];
                       for (var i = 0; i < ordenes.length; i++) {
@@ -85,9 +83,7 @@ class _PedidosPageState extends State<PedidosPage> {
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot2) {
                           if (snapshot2.data == 'waiting') {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
+                            return loaderPedidos();
                           } else {
                             return ListView.builder(
                               shrinkWrap: true,
@@ -98,9 +94,17 @@ class _PedidosPageState extends State<PedidosPage> {
                                     pedidos[index], snapshot2.data);
                               },
                             );
-                            ;
                           }
                         },
+                      );
+                    } else {
+                      return Center(
+                        child: Text('Uppss, el servidor se cayo',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15)),
                       );
                     }
                   },
@@ -265,6 +269,85 @@ class _PedidosPageState extends State<PedidosPage> {
     );
   }
 
+  Widget cardPedidoLoader() {
+    return Container(
+      alignment: Alignment.center,
+      width: double.maxFinite,
+      height: 154,
+      margin: EdgeInsets.only(bottom: 30, left: 20, right: 20),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
+            child: Container(
+              width: double.maxFinite,
+              height: 30,
+              decoration: BoxDecoration(
+                  color: Colors.grey[400],
+                  borderRadius: BorderRadius.circular(5)),
+              padding: EdgeInsets.only(left: 20),
+            ),
+          ),
+          Flexible(
+            flex: 3,
+            fit: FlexFit.tight,
+            child: Row(
+              children: [
+                Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Center(
+                        child: Container(
+                            margin: EdgeInsets.only(right: 10, top: 10),
+                            decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(5)),
+                            height: 100,
+                            width: double.maxFinite))),
+                Flexible(
+                    flex: 4,
+                    fit: FlexFit.tight,
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            fit: FlexFit.tight,
+                            child: Container(
+                                margin: EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[400],
+                                    borderRadius: BorderRadius.circular(5)),
+                                height: double.maxFinite,
+                                width: double.maxFinite),
+                          ),
+                          Flexible(
+                            flex: 1,
+                            fit: FlexFit.tight,
+                            child: Container(
+                                margin: EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[300],
+                                    borderRadius: BorderRadius.circular(5)),
+                                height: double.maxFinite,
+                                width: double.maxFinite),
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> mostrarQR() async {
     return showDialog<void>(
       context: context,
@@ -393,6 +476,17 @@ class _PedidosPageState extends State<PedidosPage> {
     return http.get(
       Uri.parse(
           'https://luisrojas24.pythonanywhere.com/get-Ordenes?id_Usuario=114518122078180188707'),
+    );
+  }
+
+  Widget loaderPedidos() {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 10,
+      itemBuilder: (BuildContext context, int index) {
+        return cardPedidoLoader();
+      },
     );
   }
 }

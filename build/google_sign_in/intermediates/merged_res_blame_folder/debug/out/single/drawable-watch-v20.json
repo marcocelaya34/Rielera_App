@@ -1,14 +1,14 @@
 [
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml",
-        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/07ad9513440a487f9d75f5d197dd7cf8/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
-    },
-    {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_disabled.xml",
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_disabled.xml",
         "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/07ad9513440a487f9d75f5d197dd7cf8/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml"
     },
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml",
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/07ad9513440a487f9d75f5d197dd7cf8/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml",
         "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/07ad9513440a487f9d75f5d197dd7cf8/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
     }
 ]

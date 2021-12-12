@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
         "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/layout-v21/notification_template_custom_big.xml"
     },
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
-        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/layout-v21/notification_action_tombstone.xml"
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/layout-v21/notification_template_icon_group.xml"
     },
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_action.xml",
         "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/layout-v21/notification_action.xml"
     },
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
-        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/layout-v21/notification_template_icon_group.xml"
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/layout-v21/notification_action_tombstone.xml"
     }
 ]

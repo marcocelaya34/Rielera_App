@@ -617,17 +617,8 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
 
   Future<http.Response> fetchIngredientes(String id) {
     return http.get(
-        Uri.parse(
-            'https://luisrojas24.pythonanywhere.com/get-ingredientes_platillo?id_Platillo=$id'),
-        headers: {
-          'Access-Control-Allow-Origin':
-              '*', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-//        'Access-Control-Allow-Origin':'http://localhost:5000/', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-
-          "Access-Control-Allow-Methods":
-              "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-          "Access-Control-Allow-Headers":
-              "Origin, X-Requested-With, Content-Type, Accept"
-        });
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/get-ingredientes_platillo?id_Platillo=$id'),
+    );
   }
 }

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/marco/Documents/GitHub/Rielera_App/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/762ac13dbc2467e07314b16cba4467fb/browser-1.0.0/res/values/values.xml",
@@ -18,6 +18,25 @@
                         "startOffsets": "166,224,290,353,1350,1421",
                         "endColumns": "57,65,62,61,70,71",
                         "endOffsets": "219,285,348,410,1416,1488"
+                    }
+                },
+                {
+                    "source": "/Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,816",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "465,980"
+                    },
+                    "to": {
+                        "startLines": "119,124",
+                        "startColumns": "4,4",
+                        "startOffsets": "8978,9275",
+                        "endLines": "123,126",
+                        "endColumns": "12,12",
+                        "endOffsets": "9270,9439"
                     }
                 },
                 {
@@ -38,22 +57,20 @@
                     }
                 },
                 {
-                    "source": "/Volumes/HD710A/rielera_app_v2/rielera_app/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/marco/Documents/GitHub/Rielera_App/build/app/generated/res/google-services/debug/values/values.xml",
                     "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,816",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "465,980"
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,281,385,494,614,708",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "194,276,380,489,609,703,774"
                     },
                     "to": {
-                        "startLines": "119,124",
-                        "startColumns": "4,4",
-                        "startOffsets": "8978,9275",
-                        "endLines": "123,126",
-                        "endColumns": "12,12",
-                        "endOffsets": "9270,9439"
+                        "startLines": "111,112,113,114,115,116,117",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "8183,8327,8409,8513,8622,8742,8836",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "8322,8404,8508,8617,8737,8831,8902"
                     }
                 },
                 {
@@ -92,23 +109,6 @@
                         "endLines": "2,142,159,248",
                         "endColumns": "60,12,24,24",
                         "endOffsets": "161,10481,11387,16598"
-                    }
-                },
-                {
-                    "source": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/app/generated/res/google-services/debug/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,281,385,494,614,708",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "194,276,380,489,609,703,774"
-                    },
-                    "to": {
-                        "startLines": "111,112,113,114,115,116,117",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "8183,8327,8409,8513,8622,8742,8836",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "8322,8404,8508,8617,8737,8831,8902"
                     }
                 },
                 {

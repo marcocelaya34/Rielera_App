@@ -600,36 +600,59 @@ class _HomePageState extends State<HomePage> {
           initialData: 'waiting',
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data != 'waiting') {
-              return FutureBuilder(
-                future: fetchPlatillos(),
-                initialData: 'waiting',
-                builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                  if (snapshot2.data != 'waiting') {
-                    return CarouselSlider(
-                        items: itemsOtrosTambien(snapshot.data, snapshot2.data),
-                        options: CarouselOptions(
-                            height: 110,
-                            aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                            viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                            initialPage: 0,
-                            enableInfiniteScroll: false,
-                            reverse: false,
-                            autoPlay: false,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 1000),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
-                            onPageChanged: (index, reason) {},
-                            scrollDirection: Axis.horizontal,
-                            disableCenter: true));
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              );
+              if (snapshot.data != null) {
+                return FutureBuilder(
+                  future: fetchPlatillos(),
+                  initialData: 'waiting',
+                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                    if (snapshot2.data != 'waiting') {
+                      if (snapshot2.data != null) {
+                        return CarouselSlider(
+                            items: itemsOtrosTambien(
+                                snapshot.data, snapshot2.data),
+                            options: CarouselOptions(
+                                height: 110,
+                                aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                                viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                                initialPage: 0,
+                                enableInfiniteScroll: false,
+                                reverse: false,
+                                autoPlay: false,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 1000),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                onPageChanged: (index, reason) {},
+                                scrollDirection: Axis.horizontal,
+                                disableCenter: true));
+                      } else {
+                        return Center(
+                          child: Text('Uppss, el servidor se cayo',
+                              textAlign: TextAlign.start,
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15)),
+                        );
+                      }
+                    } else {
+                      return Center(child: loaderRecomendacion());
+                    }
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text('Uppss, el servidor se cayo',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 15)),
+                );
+              }
             } else {
-              return Center(child: CircularProgressIndicator());
+              return loaderRecomendacion();
             }
           },
         )
@@ -665,37 +688,59 @@ class _HomePageState extends State<HomePage> {
           initialData: 'waiting',
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data != 'waiting') {
-              return FutureBuilder(
-                future: fetchPlatillos(),
-                initialData: 'waiting',
-                builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                  if (snapshot2.data != 'waiting') {
-                    return CarouselSlider(
-                        items: itemsTePuedeInteresar(
-                            snapshot.data, snapshot2.data),
-                        options: CarouselOptions(
-                            height: 110,
-                            aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                            viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                            initialPage: 0,
-                            enableInfiniteScroll: true,
-                            reverse: false,
-                            autoPlay: false,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 1000),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
-                            onPageChanged: (index, reason) {},
-                            scrollDirection: Axis.horizontal,
-                            disableCenter: true));
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              );
+              if (snapshot.data != null) {
+                return FutureBuilder(
+                  future: fetchPlatillos(),
+                  initialData: 'waiting',
+                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                    if (snapshot2.data != 'waiting') {
+                      if (snapshot2.data != null) {
+                        return CarouselSlider(
+                            items: itemsTePuedeInteresar(
+                                snapshot.data, snapshot2.data),
+                            options: CarouselOptions(
+                                height: 110,
+                                aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                                viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: false,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 1000),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                onPageChanged: (index, reason) {},
+                                scrollDirection: Axis.horizontal,
+                                disableCenter: true));
+                      } else {
+                        return Center(
+                          child: Text('Uppss, el servidor se cayo',
+                              textAlign: TextAlign.start,
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15)),
+                        );
+                      }
+                    } else {
+                      return loaderRecomendacion();
+                    }
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text('Uppss, el servidor se cayo',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 15)),
+                );
+              }
             } else {
-              return Center(child: CircularProgressIndicator());
+              return loaderRecomendacion();
             }
           },
         )
@@ -713,75 +758,100 @@ class _HomePageState extends State<HomePage> {
           initialData: 'waiting',
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data != 'waiting') {
-              if (snapshot.data.body == '[]') {
-                return SizedBox();
-              } else {
-                return FutureBuilder(
-                  future: fetchPlatillos(),
-                  initialData: 'waiting',
-                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                    if (snapshot2.data != 'waiting') {
-                      return Column(
-                        children: [
-                          FutureBuilder(
-                            future: getCategoriaRndom(randomNumber),
-                            initialData: 'waiting',
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.data == 'waiting') {
-                                return CircularProgressIndicator();
-                              } else {
-                                return Container(
-                                  padding: EdgeInsets.only(left: 30),
-                                  alignment: Alignment.centerLeft,
-                                  width: double.maxFinite,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('TOP RANKING DE ${snapshot.data}',
-                                          style: GoogleFonts.montserrat(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w200,
-                                              fontSize: 16)),
-                                      SizedBox(
-                                        height: 20,
+              if (snapshot.data != null) {
+                if (snapshot.data.body == '[]') {
+                  return SizedBox();
+                } else {
+                  return FutureBuilder(
+                    future: fetchPlatillos(),
+                    initialData: 'waiting',
+                    builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                      if (snapshot2.data != 'waiting') {
+                        if (snapshot2.data != null) {
+                          return Column(
+                            children: [
+                              FutureBuilder(
+                                future: getCategoriaRndom(randomNumber),
+                                initialData: 'waiting',
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.data == 'waiting') {
+                                    return SizedBox();
+                                  } else {
+                                    return Container(
+                                      padding: EdgeInsets.only(left: 30),
+                                      alignment: Alignment.centerLeft,
+                                      width: double.maxFinite,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              'TOP RANKING DE ${snapshot.data}',
+                                              style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontSize: 16)),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                          CarouselSlider(
-                              items: itemsTopRanking(
-                                  snapshot.data, snapshot2.data),
-                              options: CarouselOptions(
-                                  height: 110,
-                                  aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                                  viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                                  initialPage: 0,
-                                  enableInfiniteScroll: true,
-                                  reverse: false,
-                                  autoPlay: false,
-                                  autoPlayInterval: Duration(seconds: 3),
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 1000),
-                                  autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
-                                  onPageChanged: (index, reason) {},
-                                  scrollDirection: Axis.horizontal,
-                                  disableCenter: true)),
-                        ],
-                      );
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
+                                    );
+                                  }
+                                },
+                              ),
+                              CarouselSlider(
+                                  items: itemsTopRanking(
+                                      snapshot.data, snapshot2.data),
+                                  options: CarouselOptions(
+                                      height: 110,
+                                      aspectRatio:
+                                          ancho < 1000 ? 16 / 9 : 4 / 3,
+                                      viewportFraction:
+                                          ancho < 1000 ? 0.8 : 0.4,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlay: false,
+                                      autoPlayInterval: Duration(seconds: 3),
+                                      autoPlayAnimationDuration:
+                                          Duration(milliseconds: 1000),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      enlargeCenterPage: true,
+                                      onPageChanged: (index, reason) {},
+                                      scrollDirection: Axis.horizontal,
+                                      disableCenter: true)),
+                            ],
+                          );
+                        } else {
+                          return Center(
+                            child: Text('Uppss, el servidor se cayo',
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15)),
+                          );
+                        }
+                      } else {
+                        return SizedBox();
+                      }
+                    },
+                  );
+                }
+              } else {
+                return Center(
+                  child: Text('Uppss, el servidor se cayo',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 15)),
                 );
               }
             } else {
-              return Center(child: CircularProgressIndicator());
+              return SizedBox();
             }
           },
         )
@@ -816,36 +886,59 @@ class _HomePageState extends State<HomePage> {
         initialData: 'waiting',
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.data != 'waiting') {
-            return FutureBuilder(
-              future: fetchPlatillos(),
-              initialData: 'waiting',
-              builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                if (snapshot2.data != 'waiting') {
-                  return CarouselSlider(
-                      items: itemsListVanJuntos(snapshot.data, snapshot2.data),
-                      options: CarouselOptions(
-                          height: 110,
-                          aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                          viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: false,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 1000),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          onPageChanged: (index, reason) {},
-                          scrollDirection: Axis.horizontal,
-                          disableCenter: true));
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            );
+            if (snapshot.data != null) {
+              return FutureBuilder(
+                future: fetchPlatillos(),
+                initialData: 'waiting',
+                builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                  if (snapshot2.data != 'waiting') {
+                    if (snapshot2.data != null) {
+                      return CarouselSlider(
+                          items:
+                              itemsListVanJuntos(snapshot.data, snapshot2.data),
+                          options: CarouselOptions(
+                              height: 110,
+                              aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                              viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: false,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 1000),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              onPageChanged: (index, reason) {},
+                              scrollDirection: Axis.horizontal,
+                              disableCenter: true));
+                    } else {
+                      return Center(
+                        child: Text('Uppss, el servidor se cayo',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15)),
+                      );
+                    }
+                  } else {
+                    return loaderRecomendacion();
+                  }
+                },
+              );
+            } else {
+              return Center(
+                child: Text('Uppss, el servidor se cayo',
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15)),
+              );
+            }
           } else {
-            return Center(child: CircularProgressIndicator());
+            return loaderRecomendacion();
           }
         },
       ),
@@ -880,35 +973,55 @@ class _HomePageState extends State<HomePage> {
           initialData: 'waiting',
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == 'waiting') {
-              return Center(child: CircularProgressIndicator());
-            } else {
+              return loaderRecomendacion();
+            } else if (snapshot.data != null) {
               return FutureBuilder(
                 future: fetchPlatillos(),
                 initialData: 'waiting',
                 builder: (BuildContext context, AsyncSnapshot snapshot2) {
                   if (snapshot2.data != 'waiting') {
-                    return CarouselSlider(
-                        items: itemsList(snapshot.data, snapshot2.data),
-                        options: CarouselOptions(
-                            height: 110,
-                            aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                            viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                            initialPage: 0,
-                            enableInfiniteScroll: true,
-                            reverse: false,
-                            autoPlay: false,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 1000),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
-                            onPageChanged: (index, reason) {},
-                            scrollDirection: Axis.horizontal,
-                            disableCenter: true));
+                    if (snapshot2.data != null) {
+                      return CarouselSlider(
+                          items: itemsList(snapshot.data, snapshot2.data),
+                          options: CarouselOptions(
+                              height: 110,
+                              aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                              viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: false,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 1000),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              onPageChanged: (index, reason) {},
+                              scrollDirection: Axis.horizontal,
+                              disableCenter: true));
+                    } else {
+                      return Center(
+                        child: Text('Uppss, el servidor se cayo',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15)),
+                      );
+                    }
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return loaderRecomendacion();
                   }
                 },
+              );
+            } else {
+              return Center(
+                child: Text('Uppss, el servidor se cayo',
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15)),
               );
             }
           },
@@ -944,38 +1057,49 @@ class _HomePageState extends State<HomePage> {
           future: fetchRecomendados(context),
           initialData: 'waiting',
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data != 'waiting' && snapshot.data != null) {
-              return FutureBuilder(
-                future: fetchPlatillos(),
-                initialData: 'waiting',
-                builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                  if (snapshot2.data != 'waiting' && snapshot2.data != null) {
-                    return CarouselSlider(
-                        items: itemsListRecomendaciones(
-                            snapshot.data, snapshot2.data),
-                        options: CarouselOptions(
-                            height: 110,
-                            aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                            viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                            initialPage: 0,
-                            enableInfiniteScroll: false,
-                            reverse: false,
-                            autoPlay: false,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 1000),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
-                            onPageChanged: (index, reason) {},
-                            scrollDirection: Axis.horizontal,
-                            disableCenter: true));
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              );
+            if (snapshot.data != 'waiting') {
+              if (snapshot.data != null) {
+                return FutureBuilder(
+                  future: fetchPlatillos(),
+                  initialData: 'waiting',
+                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                    if (snapshot2.data != 'waiting' && snapshot2.data != null) {
+                      return CarouselSlider(
+                          items: itemsListRecomendaciones(
+                              snapshot.data, snapshot2.data),
+                          options: CarouselOptions(
+                              height: 110,
+                              aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                              viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                              initialPage: 0,
+                              enableInfiniteScroll: false,
+                              reverse: false,
+                              autoPlay: false,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 1000),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              onPageChanged: (index, reason) {},
+                              scrollDirection: Axis.horizontal,
+                              disableCenter: true));
+                    } else {
+                      return loaderRecomendacion();
+                    }
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text('Uppss, el servidor se cayo',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 15)),
+                );
+              }
             } else {
-              return Center(child: CircularProgressIndicator());
+              return loaderRecomendacion();
             }
           },
         ),
@@ -1050,132 +1174,224 @@ class _HomePageState extends State<HomePage> {
 
     return recomendados.toUpperCase();
   }
-}
 
-Future<http.Response> fetchCategorias(BuildContext context) {
-  return http.get(
-    Uri.parse('https://luisrojas24.pythonanywhere.com/get-categorias'),
-  );
-}
+  List<Widget> itemsLoader() {
+    MediaQueryData queryData = MediaQuery.of(context);
+    double ancho = queryData.size.width;
 
-Future<http.Response> fetchVanJuntos(BuildContext context) {
-  return http.get(
-    Uri.parse('https://luisrojas24.pythonanywhere.com/get-reglas'),
-  );
-}
+    List<Widget> card = [];
 
-Future<http.Response> fetchTePuedeInteresar(BuildContext context) {
-  return http.get(
-    Uri.parse(
-        'https://luisrojas24.pythonanywhere.com/rec_content_based?id_Usuario=114518122078180188707'),
-  );
-}
+    for (var i = 0; i < 5; i++) {
+      card.add(Container(
+        width: 300,
+        padding: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: Row(
+          children: [
+            Flexible(
+              flex: 2,
+              fit: FlexFit.tight,
+              child: Center(
+                child: Container(
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  margin: EdgeInsets.only(right: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(5)),
+                ),
+              ),
+            ),
+            Flexible(
+                flex: 4,
+                fit: FlexFit.tight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        margin: EdgeInsets.only(bottom: 5, left: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        margin: EdgeInsets.only(top: 5, left: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                  ],
+                ))
+          ],
+        ),
+      ));
+    }
 
-Future<http.Response> fetchTopRanking(randomNumber) {
-  return http.get(
-    Uri.parse(
-        'https://luisrojas24.pythonanywhere.com/get-rankings?id_categoria=$randomNumber'),
-  );
-}
-
-Future<http.Response> fetchOtrosTambien(randomNumber) {
-  return http.get(
-    Uri.parse(
-        'https://luisrojas24.pythonanywhere.com/rec_colab_item?id_Usuario=101994360380017395432'),
-  );
-}
-
-Future<dynamic> fetchMasComprados() async {
-  List<MasComprados> posts = [];
-
-  for (var i = 1; i < 15; i++) {
-    http.Response request = await http.get(
-      Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/get-mas_pedidos?tiempo=30&id_categoria=${i}'),
-    );
-
-    Iterable l = json.decode(request.body);
-
-    posts.addAll(l.map((model) => MasComprados.fromJson(model)));
+    return card;
   }
 
-  return posts;
-}
+  Widget loaderRecomendacion() {
+    MediaQueryData queryData = MediaQuery.of(context);
+    double ancho = queryData.size.width;
 
-Future<http.Response> fetchPlatillos() {
-  return http.get(
-    Uri.parse('https://luisrojas24.pythonanywhere.com/get-platillos'),
-  );
-}
+    return CarouselSlider(
+        items: itemsLoader(),
+        options: CarouselOptions(
+            height: 110,
+            aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+            viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: false,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 1000),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            enlargeCenterPage: true,
+            onPageChanged: (index, reason) {},
+            scrollDirection: Axis.horizontal,
+            disableCenter: true));
+  }
 
-Future<List<dynamic>> fetchRecomendados(BuildContext context) async {
-  final providerCarrito = Provider.of<CarritoProvider>(context, listen: false);
-  List<dynamic> posts = [];
-  List<dynamic> articulos = providerCarrito.getArticulos;
-  if (articulos.isNotEmpty) {
-    for (var i = 0; i < articulos.length; i++) {
+  Future<http.Response> fetchCategorias(BuildContext context) {
+    return http.get(
+      Uri.parse('https://luisrojas24.pythonanywhere.com/get-categorias'),
+    );
+  }
+
+  Future<http.Response> fetchVanJuntos(BuildContext context) {
+    return http.get(
+      Uri.parse('https://luisrojas24.pythonanywhere.com/get-reglas'),
+    );
+  }
+
+  Future<http.Response> fetchTePuedeInteresar(BuildContext context) {
+    return http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/rec_content_based?id_Usuario=114518122078180188707'),
+    );
+  }
+
+  Future<http.Response> fetchTopRanking(randomNumber) {
+    return http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/get-rankings?id_categoria=$randomNumber'),
+    );
+  }
+
+  Future<http.Response> fetchOtrosTambien(randomNumber) {
+    return http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/rec_colab_item?id_Usuario=101994360380017395432'),
+    );
+  }
+
+  Future<dynamic> fetchMasComprados() async {
+    List<MasComprados> posts = [];
+
+    for (var i = 1; i < 15; i++) {
       http.Response request = await http.get(
         Uri.parse(
-            'https://luisrojas24.pythonanywhere.com/get-asociaciones?id_platillo=${articulos[i]['id']}'),
+            'https://luisrojas24.pythonanywhere.com/get-mas_pedidos?tiempo=30&id_categoria=${i}'),
       );
 
-      List<dynamic> l = json.decode(request.body);
+      Iterable l = json.decode(request.body);
 
-//Primero 2 PLatillos Recomendados
-      for (var i = 0; i < 2; i++) {
-        var idPlatillo = l[i]
-            .toString()
-            .split(',')[0]
-            .split(':')[1]
-            .trim()
-            .replaceAll('.0', '');
-        var acompaniamiento = l[i]
-            .toString()
-            .split(',')[1]
-            .split(':')[1]
-            .trim()
-            .replaceAll('.0', '');
-        var asociacion = l[i]
-            .toString()
-            .split(',')[2]
-            .split(':')[1]
-            .trim()
-            .replaceAll('.0', '');
-
-        posts.contains(acompaniamiento) ? null : posts.add(acompaniamiento);
-      }
+      posts.addAll(l.map((model) => MasComprados.fromJson(model)));
     }
 
     return posts;
-  } else {
-    http.Response request = await http.get(
-      Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/get-asociaciones?id_platillo=2'),
+  }
+
+  Future<http.Response> fetchPlatillos() {
+    return http.get(
+      Uri.parse('https://luisrojas24.pythonanywhere.com/get-platillos'),
     );
+  }
 
-    Iterable l = json.decode(request.body);
+  Future<List<dynamic>> fetchRecomendados(BuildContext context) async {
+    final providerCarrito =
+        Provider.of<CarritoProvider>(context, listen: false);
+    List<dynamic> posts = [];
+    List<dynamic> articulos = providerCarrito.getArticulos;
+    if (articulos.isNotEmpty) {
+      for (var i = 0; i < articulos.length; i++) {
+        http.Response request = await http.get(
+          Uri.parse(
+              'https://luisrojas24.pythonanywhere.com/get-asociaciones?id_platillo=${articulos[i]['id']}'),
+        );
 
-    var idPlatillo = l.first
-        .toString()
-        .split(',')[0]
-        .split(':')[1]
-        .trim()
-        .replaceAll('.0', '');
-    var acompaniamiento = l.first
-        .toString()
-        .split(',')[1]
-        .split(':')[1]
-        .trim()
-        .replaceAll('.0', '');
-    var asociacion = l.first
-        .toString()
-        .split(',')[2]
-        .split(':')[1]
-        .trim()
-        .replaceAll('.0', '');
+        List<dynamic> l = json.decode(request.body);
 
-    posts.contains(acompaniamiento) ? null : posts.add(acompaniamiento);
+//Primero 2 PLatillos Recomendados
+        for (var i = 0; i < 2; i++) {
+          var idPlatillo = l[i]
+              .toString()
+              .split(',')[0]
+              .split(':')[1]
+              .trim()
+              .replaceAll('.0', '');
+          var acompaniamiento = l[i]
+              .toString()
+              .split(',')[1]
+              .split(':')[1]
+              .trim()
+              .replaceAll('.0', '');
+          var asociacion = l[i]
+              .toString()
+              .split(',')[2]
+              .split(':')[1]
+              .trim()
+              .replaceAll('.0', '');
 
-    return posts;
+          posts.contains(acompaniamiento) ? null : posts.add(acompaniamiento);
+        }
+      }
+
+      return posts;
+    } else {
+      http.Response request = await http.get(
+        Uri.parse(
+            'https://luisrojas24.pythonanywhere.com/get-asociaciones?id_platillo=2'),
+      );
+
+      Iterable l = json.decode(request.body);
+
+      var idPlatillo = l.first
+          .toString()
+          .split(',')[0]
+          .split(':')[1]
+          .trim()
+          .replaceAll('.0', '');
+      var acompaniamiento = l.first
+          .toString()
+          .split(',')[1]
+          .split(':')[1]
+          .trim()
+          .replaceAll('.0', '');
+      var asociacion = l.first
+          .toString()
+          .split(',')[2]
+          .split(':')[1]
+          .trim()
+          .replaceAll('.0', '');
+
+      posts.contains(acompaniamiento) ? null : posts.add(acompaniamiento);
+
+      return posts;
+    }
   }
 }

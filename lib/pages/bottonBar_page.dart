@@ -32,14 +32,12 @@ class _BottomBarPageState extends State<BottomBarPage> {
     var posicion = providerBar.getPosicion;
     print(posicion);
 
-Future.delayed(Duration(milliseconds: 100)).whenComplete(() {
-if (providerBar.getpageController.hasClients) {
-      providerBar.getpageController.jumpToPage(posicion);
-    }
+    Future.delayed(Duration(milliseconds: 100)).whenComplete(() {
+      if (providerBar.getpageController.hasClients) {
+        providerBar.getpageController.jumpToPage(posicion);
+      }
+    });
 
-});
-    
-    
     Future<bool> _onWillPop() async {
       Navigator.pushReplacementNamed(context, 'loginPage');
       return true;
@@ -65,7 +63,6 @@ if (providerBar.getpageController.hasClients) {
           color: Colors.transparent,
           duration: const Duration(seconds: 1),
           child: PageView(
-            
             physics: NeverScrollableScrollPhysics(),
             restorationId: '3',
             onPageChanged: _onPageChanged,
@@ -78,65 +75,60 @@ if (providerBar.getpageController.hasClients) {
             ],
           ),
         ),
-        bottomNavigationBar: SnakeNavigationBar.color(
-          /* behaviour: snakeBarStyle,
-          snakeShape: snakeShape,
-          shape: bottomBarShape,
-          padding: padding,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.black.withOpacity(0.0001),
+              Colors.black.withOpacity(0.3),
+              Colors.black.withOpacity(0.6),
+              Colors.black.withOpacity(1),
+            ],
+          )),
+          child: SnakeNavigationBar.color(
+            height: 60,
+            elevation: 10,
+            behaviour: SnakeBarBehaviour.floating,
+            snakeShape: SnakeShape.circle,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+            ),
+            padding: EdgeInsets.only(left: 50, right: 50, bottom: 30),
 
-          ///configuration for SnakeNavigationBar.color
-          snakeViewColor: selectedColor,
-          selectedItemColor:
-              snakeShape == SnakeShape.indicator ? selectedColor : null,
-          unselectedItemColor: Colors.blueGrey,
+            ///configuration for SnakeNavigationBar.color
+            snakeViewColor: Colors.black,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.black,
+            backgroundColor: Colors.white,
+            showUnselectedLabels: true,
+            showSelectedLabels: true,
 
-          ///configuration for SnakeNavigationBar.gradient
-          //snakeViewGradient: selectedGradient,
-          //selectedItemGradient: snakeShape == SnakeShape.indicator ? selectedGradient : null,
-          //unselectedItemGradient: unselectedGradient,
-
-          showUnselectedLabels: showUnselectedLabels,
-          showSelectedLabels: showSelectedLabels, */
-          height: 60,
-          elevation: 10,
-          behaviour: SnakeBarBehaviour.floating,
-          snakeShape: SnakeShape.circle,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(100)),
+            currentIndex: providerBar.getPosicion,
+            onTap: (index) => setState(() {
+              providerBar.setPosicion(index);
+              if (providerBar.getpageController.hasClients) {
+                providerBar.getpageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 10),
+                  curve: Curves.easeIn,
+                );
+              }
+            }),
+            items: [
+              const BottomNavigationBarItem(
+                  icon: Icon(Custom.list_bullet), label: 'Pedidos'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Custom.home), label: 'Home'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Custom.shopping_cart), label: 'Carrito'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Custom.knife_fork), label: 'Carta'),
+            ],
+            selectedLabelStyle: const TextStyle(fontSize: 34),
+            unselectedLabelStyle: const TextStyle(fontSize: 10),
           ),
-          padding: EdgeInsets.only(left: 50, right: 50, bottom: 30),
-
-          ///configuration for SnakeNavigationBar.color
-          snakeViewColor: Colors.black,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.black,
-          backgroundColor: Colors.white,
-          showUnselectedLabels: true,
-          showSelectedLabels: true,
-
-          currentIndex: providerBar.getPosicion,
-          onTap: (index) => setState(() {
-            providerBar.setPosicion(index);
-            if (providerBar.getpageController.hasClients) {
-              providerBar.getpageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 10),
-                curve: Curves.easeIn,
-              );
-            }
-          }),
-          items: [
-            const BottomNavigationBarItem(
-                icon: Icon(Custom.list_bullet), label: 'Pedidos'),
-            const BottomNavigationBarItem(
-                icon: Icon(Custom.home), label: 'Home'),
-            const BottomNavigationBarItem(
-                icon: Icon(Custom.shopping_cart), label: 'Carrito'),
-            const BottomNavigationBarItem(
-                icon: Icon(Custom.knife_fork), label: 'Carta'),
-          ],
-          selectedLabelStyle: const TextStyle(fontSize: 34),
-          unselectedLabelStyle: const TextStyle(fontSize: 10),
         ),
       ),
     );

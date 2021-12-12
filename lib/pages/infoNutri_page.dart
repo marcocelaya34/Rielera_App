@@ -94,32 +94,69 @@ class _InfoNutriPageState extends State<InfoNutriPage> {
                                         'CARBOHIDRATOS',
                                         snapshot.data.length > 2
                                             ? snapshot.data[2]['cantidad']
-                                            : '-')),
+                                            : '-',
+                                        snapshot.data.length > 2
+                                            ? double.parse(snapshot.data[2]
+                                                            ['cantidad']
+                                                        .toString()
+                                                        .replaceAll('mg', '')) >
+                                                    150
+                                                ? Colors.red
+                                                : Colors.black
+                                            : Colors.black)),
                                 Flexible(
                                     flex: 1,
                                     child: cardInfo(
                                         'GRASAS',
                                         snapshot.data.length > 1
                                             ? snapshot.data[1]['cantidad']
-                                            : '-')),
+                                            : '-',
+                                        snapshot.data.length > 1
+                                            ? double.parse(snapshot.data[1]
+                                                            ['cantidad']
+                                                        .toString()
+                                                        .replaceAll('mg', '')) >
+                                                    160
+                                                ? Colors.red
+                                                : Colors.black
+                                            : Colors.black)),
                               ],
                             ),
                             Row(
                               children: [
                                 Flexible(
-                                    flex: 1,
-                                    child: cardInfo(
-                                        'SODIO',
-                                        snapshot.data.length > 3
-                                            ? snapshot.data[3]['cantidad']
-                                            : '-')),
+                                  flex: 1,
+                                  child: cardInfo(
+                                      'SODIO',
+                                      snapshot.data.length > 3
+                                          ? snapshot.data[3]['cantidad']
+                                          : '-',
+                                      snapshot.data.length > 3
+                                          ? double.parse(snapshot.data[3]
+                                                          ['cantidad']
+                                                      .toString()
+                                                      .replaceAll('mg', '')) >
+                                                  35
+                                              ? Colors.red
+                                              : Colors.black
+                                          : Colors.black),
+                                ),
                                 Flexible(
                                     flex: 1,
                                     child: cardInfo(
                                         'CALORIAS',
                                         snapshot.data.length > 0
                                             ? snapshot.data[0]['cantidad']
-                                            : '-')),
+                                            : '-',
+                                        snapshot.data.length > 0
+                                            ? double.parse(snapshot.data[0]
+                                                            ['cantidad']
+                                                        .toString()
+                                                        .replaceAll('mg', '')) >
+                                                    275
+                                                ? Colors.red
+                                                : Colors.black
+                                            : Colors.black))
                               ],
                             )
                           ],
@@ -136,7 +173,7 @@ class _InfoNutriPageState extends State<InfoNutriPage> {
     );
   }
 
-  Widget cardInfo(String text, String cantidad) {
+  Widget cardInfo(String text, String cantidad, Color color) {
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -170,7 +207,7 @@ class _InfoNutriPageState extends State<InfoNutriPage> {
             width: double.maxFinite,
             padding: EdgeInsets.only(top: 20, bottom: 20),
             decoration: BoxDecoration(
-                color: Colors.black,
+                color: color,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20))),

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
+            "outputFile": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/res/merged/debug/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/627e8a2edfaed4fc0ad2cc1fab582c01/media-1.0.0/res/values-v21/values-v21.xml",
@@ -44,7 +44,7 @@
             ]
         },
         {
-            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/google_sign_in/intermediates/res/merged/debug/values-v21/values-v21.xml",
+            "outputFile": "/Users/marco/Documents/GitHub/Rielera_App/build/google_sign_in/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/627e8a2edfaed4fc0ad2cc1fab582c01/media-1.0.0/res/values-v21/values-v21.xml",

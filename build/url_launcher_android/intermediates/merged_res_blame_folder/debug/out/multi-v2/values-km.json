@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/url_launcher_android/intermediates/res/merged/debug/values-km/values-km.xml",
+            "outputFile": "/Users/marco/Documents/GitHub/Rielera_App/build/url_launcher_android/intermediates/incremental/mergeDebugResources/merged.dir/values-km/values-km.xml",
             "map": [
                 {
                     "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values-km/values-km.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/url_launcher_android/intermediates/incremental/mergeDebugResources/merged.dir/values-km/values-km.xml",
+            "outputFile": "/Users/marco/Documents/GitHub/Rielera_App/build/url_launcher_android/intermediates/res/merged/debug/values-km/values-km.xml",
             "map": [
                 {
                     "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values-km/values-km.xml",

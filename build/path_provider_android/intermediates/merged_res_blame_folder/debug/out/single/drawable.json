@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
-        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_icon_background.xml"
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_bg.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_bg.xml"
     },
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
-        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_bg_low.xml"
-    },
-    {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
         "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_tile_bg.xml"
     },
     {
-        "merged": "/Volumes/HD710A/rielera_app_v2/rielera_app/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_bg.xml",
-        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_bg.xml"
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/marco/Documents/GitHub/Rielera_App/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
+        "source": "/Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/drawable/notification_icon_background.xml"
     }
 ]
