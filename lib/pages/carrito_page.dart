@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:rielera_app/providers/carritoProvider.dart';
+import 'package:http/http.dart' as http;
 
 class CarritoPage extends StatefulWidget {
   @override
@@ -10,6 +12,8 @@ class CarritoPage extends StatefulWidget {
 }
 
 class _CarritoPageState extends State<CarritoPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     /*  MediaQueryData queryData = MediaQuery.of(context);
@@ -106,6 +110,7 @@ class _CarritoPageState extends State<CarritoPage> {
                                               providerCarrito.setArticulos =
                                                   empty;
                                               mostrarQR(context, articulos);
+                                              generarOrden(articulos);
                                               setState(() {});
                                             },
                                             child: Container(
@@ -332,6 +337,39 @@ class _CarritoPageState extends State<CarritoPage> {
           ),
         ],
       ),
+    );
+  }
+
+  void generarOrden(List<dynamic> articulos) async {
+    String? id = _auth.currentUser?.uid;
+
+    String platillos = '';
+
+    for (var item in articulos) {
+      platillos = platillos + '${item['nombre']}*${item['cantidad']},';
+    }
+
+    print(platillos.replaceAll(' ', '_'));
+
+    String dataQR = '';
+
+    for (var item in articulos) {
+      dataQR = dataQR +
+          'Platillo:${item['nombre']}\n Cantidad:${item['cantidad']}\n\n';
+    }
+
+    print(dataQR);
+
+    var response =
+        await fetchGenerarOrden(id, platillos.replaceAll(' ', '_'), dataQR);
+    print(response);
+  }
+
+  Future<http.Response> fetchGenerarOrden(
+      String? id, String platillos, String dataQR) {
+    return http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/set-orden?id_Usuario=${id}&Platillos=${platillos}&qr=${dataQR}'),
     );
   }
 }

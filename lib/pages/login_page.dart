@@ -201,7 +201,8 @@ class _LoginPageState extends State<LoginPage> {
             await auth.signInWithPopup(authProvider);
 
         user = userCredential.user;
-        guardarUser(user!.providerData[0].uid ?? '');
+        var response = await guardarUser(user!.uid);
+        print(response);
       } catch (e) {
         print(e);
       }
@@ -225,6 +226,9 @@ class _LoginPageState extends State<LoginPage> {
               await auth.signInWithCredential(credential);
 
           user = userCredential.user;
+
+          var response = await guardarUser(user!.uid);
+          print(response);
         } on FirebaseAuthException catch (e) {
           if (e.code == 'account-exists-with-different-credential') {
             // ...
@@ -242,17 +246,8 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<http.Response> guardarUser(String uid) {
     return http.get(
-        Uri.parse(
-            'https://luisrojas24.pythonanywhere.com/set-usuario?id_Usuario=$uid'),
-        headers: {
-          'Access-Control-Allow-Origin':
-              '*', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-//        'Access-Control-Allow-Origin':'http://localhost:5000/', // Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.
-
-          "Access-Control-Allow-Methods":
-              "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-          "Access-Control-Allow-Headers":
-              "Origin, X-Requested-With, Content-Type, Accept"
-        });
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/set-usuario?id_Usuario=$uid'),
+    );
   }
 }
