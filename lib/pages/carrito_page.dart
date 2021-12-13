@@ -81,20 +81,10 @@ class _CarritoPageState extends State<CarritoPage> {
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: articulos.length,
                                 itemBuilder: (context, index) {
-                                  return Dismissible(
-                                    key: Key(articulos[index]['nombre']),
-                                    onDismissed: (direction) {
-                                      List<dynamic> articulos =
-                                          providerCarrito.getArticulos;
-                                      articulos.remove(articulos[index]);
-                                      providerCarrito.setArticulos = articulos;
-                                      setState(() {});
-                                    },
-                                    child: cardProductoCar(
-                                        articulos[index]['nombre'],
-                                        articulos[index]['imagen'],
-                                        articulos[index]['cantidad']),
-                                  );
+                                  return cardProductoCar(
+                                      articulos[index]['nombre'],
+                                      articulos[index]['imagen'],
+                                      articulos[index]['cantidad']);
                                 },
                               ),
                               getTotal() != 0
@@ -252,6 +242,8 @@ class _CarritoPageState extends State<CarritoPage> {
           'Platillo:${item['nombre']}\n Cantidad:${item['cantidad']}\n\n';
     }
 
+    print(dataQR);
+
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -353,15 +345,11 @@ class _CarritoPageState extends State<CarritoPage> {
 
     String platillos = '';
 
-    for (var i = 0; i < articulos.length; i++) {
-      if (i == articulos.length - 1) {
-        platillos =
-            platillos + '${articulos[i]['nombre']}*${articulos[i]['cantidad']}';
-      } else {
-        platillos = platillos +
-            '${articulos[i]['nombre']}*${articulos[i]['cantidad']},';
-      }
+    for (var item in articulos) {
+      platillos = platillos + '${item['nombre']}*${item['cantidad']},';
     }
+
+    print(platillos.replaceAll(' ', '_'));
 
     String dataQR = '';
 
@@ -370,17 +358,18 @@ class _CarritoPageState extends State<CarritoPage> {
           'Platillo:${item['nombre']}\n Cantidad:${item['cantidad']}\n\n';
     }
 
+    print(dataQR);
+
     var response =
         await fetchGenerarOrden(id, platillos.replaceAll(' ', '_'), dataQR);
+    print(response);
   }
 
   Future<http.Response> fetchGenerarOrden(
       String? id, String platillos, String dataQR) {
-    var response = http.get(
+    return http.get(
       Uri.parse(
           'https://luisrojas24.pythonanywhere.com/set-orden?id_Usuario=${id}&Platillos=${platillos}&qr=${dataQR}'),
     );
-
-    return response;
   }
 }

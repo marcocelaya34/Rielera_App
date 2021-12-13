@@ -83,6 +83,7 @@ class _InfoNutriPageState extends State<InfoNutriPage> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
+                        print(snapshot.data);
                         return Column(
                           children: [
                             Row(

@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:expandable/expandable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:http/http.dart' as http;
-import 'package:qr_flutter/qr_flutter.dart';
 
 class PedidosPage extends StatefulWidget {
   @override
@@ -14,8 +12,6 @@ class PedidosPage extends StatefulWidget {
 }
 
 class _PedidosPageState extends State<PedidosPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +69,7 @@ class _PedidosPageState extends State<PedidosPage> {
                     } else if (snapshot.data != null) {
                       List<dynamic> ordenes = json.decode(snapshot.data.body);
                       List<List<dynamic>> pedidos = [];
-                      for (var i = 0; i < 600; i++) {
+                      for (var i = 0; i < ordenes.length; i++) {
                         List<dynamic> addPedido = ordenes
                             .where((orden) => orden['id_Orden'] == i)
                             .toList();
@@ -95,7 +91,7 @@ class _PedidosPageState extends State<PedidosPage> {
                               itemCount: pedidos.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return cardPedido(
-                                    pedidos[index], snapshot2.data, index);
+                                    pedidos[index], snapshot2.data);
                               },
                             );
                           }
@@ -122,9 +118,8 @@ class _PedidosPageState extends State<PedidosPage> {
     );
   }
 
-  Widget cardPedido(List<dynamic> pedidos, dynamic platillos, int index) {
-    List<String> fecha = pedidos[0]['Fecha'].toString().split(' ');
-    String qr = pedidos[0]['Codigo_qr'].toString();
+  Widget cardPedido(List<dynamic> pedidos, dynamic platillos) {
+    print(pedidos);
     return Container(
       alignment: Alignment.center,
       width: double.maxFinite,
@@ -137,7 +132,7 @@ class _PedidosPageState extends State<PedidosPage> {
           Container(
             padding: EdgeInsets.only(left: 20),
             alignment: Alignment.centerLeft,
-            child: Text('PEDIDOx${index + 1}',
+            child: Text('PEDIDOx1',
                 textAlign: TextAlign.start,
                 style: GoogleFonts.montserrat(
                     color: Colors.black,
@@ -156,7 +151,7 @@ class _PedidosPageState extends State<PedidosPage> {
                   flex: 2,
                   child: InkWell(
                     onTap: () {
-                      mostrarQR(pedidos[0]['Codigo_qr']);
+                      mostrarQR();
                     },
                     child: Center(
                         child: Container(
@@ -181,7 +176,7 @@ class _PedidosPageState extends State<PedidosPage> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(fecha[0] + fecha[1] + fecha[2] + fecha[3],
+                              Text('21.04.2021',
                                   style: GoogleFonts.montserrat(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
@@ -199,7 +194,7 @@ class _PedidosPageState extends State<PedidosPage> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(fecha[4],
+                              Text('14:25',
                                   style: GoogleFonts.montserrat(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
@@ -247,11 +242,11 @@ class _PedidosPageState extends State<PedidosPage> {
                                 pedidos[index]['id_Platillo'])
                             .toList());
 
+                        print(acompaniamientos);
                         return platilloCard(
-                          acompaniamientos[0][0]['Video_RA'],
-                          acompaniamientos[0][0]['Nombre_platillo'],
-                          pedidos[index]['Cantidad'],
-                        );
+                            acompaniamientos[0][0]['Video_RA'],
+                            acompaniamientos[0][0]['Nombre_platillo'],
+                            pedidos[index]['Cantidad']);
                       },
                     ),
                     ExpandableButton(
@@ -353,7 +348,7 @@ class _PedidosPageState extends State<PedidosPage> {
     );
   }
 
-  Future<void> mostrarQR(String qr) async {
+  Future<void> mostrarQR() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -373,15 +368,9 @@ class _PedidosPageState extends State<PedidosPage> {
               )
             ],
           ),
-          content: Container(
-            height: 300,
-            width: 300,
-            color: Colors.transparent,
-            child: QrImage(
-              data: qr,
-              version: QrVersions.auto,
-              size: 320,
-              gapless: false,
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[Image.asset('assets/imagenQR.png')],
             ),
           ),
           actions: <Widget>[
@@ -463,7 +452,7 @@ class _PedidosPageState extends State<PedidosPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text('MXN\$${(cantidad ?? 0) * 20}',
+                      Text('MXN\$30',
                           style: GoogleFonts.montserrat(
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
@@ -484,11 +473,9 @@ class _PedidosPageState extends State<PedidosPage> {
   }
 
   Future<http.Response> fetchOrdenes() {
-    String? id = _auth.currentUser?.uid;
-
     return http.get(
       Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/get-Ordenes?id_Usuario=$id'),
+          'https://luisrojas24.pythonanywhere.com/get-Ordenes?id_Usuario=114518122078180188707'),
     );
   }
 

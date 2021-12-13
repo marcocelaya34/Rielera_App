@@ -30,6 +30,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
     final providerBar = Provider.of<BarProvider>(context);
 
     var posicion = providerBar.getPosicion;
+    print(posicion);
 
     Future.delayed(Duration(milliseconds: 100)).whenComplete(() {
       if (providerBar.getpageController.hasClients) {

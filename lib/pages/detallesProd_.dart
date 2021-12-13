@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -32,8 +31,6 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
   String descripcion = '';
   var categoria = '';
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     star1 = false;
@@ -43,7 +40,6 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
     star5 = false;
 
     final providerPlatillo = Provider.of<PlatilloProvider>(context);
-    String? idUser = _auth.currentUser?.uid;
 
     id = providerPlatillo.getId;
     nombre = providerPlatillo.getNombre;
@@ -61,8 +57,6 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
       Navigator.pushReplacementNamed(context, 'bottomBar');
       return true;
     }
-
-    agregarRevisado(id);
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -207,6 +201,8 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                                           ', ' +
                                           e['Nombre_ingrediente'];
                                     }
+
+                                    print(e);
                                   }).toList();
                                   return Text(descripcion,
                                       textAlign: TextAlign.left,
@@ -221,15 +217,248 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                               },
                             ),
                           ),
-                          FutureBuilder(
-                            future: fetchisCalificado(idUser!, id),
-                            initialData: 'waiting',
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.data != 'waiting') {
-                                return estrellas(snapshot.data.body);
+                          StatefulBuilder(
+                            builder: (BuildContext context, setState) {
+                              if (ancho > 760) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 70),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = false;
+                                              star3 = false;
+                                              star4 = false;
+                                              star5 = false;
+
+                                              calificacion = '1';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star1
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = false;
+                                              star4 = false;
+                                              star5 = false;
+                                              calificacion = '2';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star2
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = true;
+                                              star4 = false;
+                                              star5 = false;
+                                              calificacion = '3';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star3
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = true;
+                                              star4 = true;
+                                              star5 = false;
+                                              calificacion = '4';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star4
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = true;
+                                              star4 = true;
+                                              star5 = true;
+                                              calificacion = '5';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star5
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                );
                               } else {
-                                return SizedBox();
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = false;
+                                              star3 = false;
+                                              star4 = false;
+                                              star5 = false;
+
+                                              calificacion = '1';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star1
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = false;
+                                              star4 = false;
+                                              star5 = false;
+                                              calificacion = '2';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star2
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = true;
+                                              star4 = false;
+                                              star5 = false;
+                                              calificacion = '3';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star3
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = true;
+                                              star4 = true;
+                                              star5 = false;
+                                              calificacion = '4';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star4
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                      Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              star1 = true;
+                                              star2 = true;
+                                              star3 = true;
+                                              star4 = true;
+                                              star5 = true;
+                                              calificacion = '5';
+                                              setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: star5
+                                                  ? Image.asset(
+                                                      'assets/star_fill2.png')
+                                                  : Image.asset(
+                                                      'assets/star2.png'),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                );
                               }
                             },
                           ),
@@ -277,51 +506,48 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 22)),
                           ),
-                          StatefulBuilder(
-                            builder: (BuildContext context, setState) {
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Flexible(
-                                      flex: 1,
-                                      child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              if (cantidad > 1)
-                                                cantidad = cantidad - 1;
-                                            });
-                                          },
-                                          child: Image.asset(
-                                              'assets/BotonMas.png'))),
-                                  Flexible(
-                                      flex: 1,
-                                      child: Text('$cantidad',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.montserrat(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w300,
-                                              fontSize: 40))),
-                                  Flexible(
-                                      flex: 1,
-                                      child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              if (cantidad < 10)
-                                                cantidad = cantidad + 1;
-                                            });
-                                          },
-                                          child: Image.asset(
-                                              'assets/BotonMenos.png'))),
-                                ],
-                              );
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                  flex: 1,
+                                  child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          if (cantidad > 1)
+                                            cantidad = cantidad - 1;
+                                        });
+                                      },
+                                      child:
+                                          Image.asset('assets/BotonMas.png'))),
+                              Flexible(
+                                  flex: 1,
+                                  child: Text('$cantidad',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 40))),
+                              Flexible(
+                                  flex: 1,
+                                  child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          if (cantidad < 10)
+                                            cantidad = cantidad + 1;
+                                        });
+                                      },
+                                      child: Image.asset(
+                                          'assets/BotonMenos.png'))),
+                            ],
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           InkWell(
-                            onTap: () async {
+                            onTap: () {
                               Provider.of<BarProvider>(context, listen: false);
+                              print(providerBar.getPosicion);
 
                               final providerCarrito =
                                   Provider.of<CarritoProvider>(context,
@@ -338,7 +564,6 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                               });
                               providerCarrito.setArticulos = articulos;
 
-                              agregarCalificacion(id);
                               Navigator.pushReplacementNamed(
                                   context, 'bottomBar');
                             },
@@ -390,330 +615,10 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
     );
   }
 
-  Widget estrellas(String opcion) {
-    MediaQueryData queryData = MediaQuery.of(context);
-
-    if (opcion == '-1') {
-      star1 = false;
-      star2 = false;
-      star3 = false;
-      star4 = false;
-      star5 = false;
-    } else {
-      switch (opcion) {
-        case '1':
-          star1 = true;
-          star2 = false;
-          star3 = false;
-          star4 = false;
-          star5 = false;
-          break;
-        case '2':
-          star1 = true;
-          star2 = true;
-          star3 = false;
-          star4 = false;
-          star5 = false;
-          break;
-        case '3':
-          star1 = true;
-          star2 = true;
-          star3 = true;
-          star4 = false;
-          star5 = false;
-          break;
-        case '4':
-          star1 = true;
-          star2 = true;
-          star3 = true;
-          star4 = true;
-          star5 = false;
-          break;
-        case '5':
-          star1 = true;
-          star2 = true;
-          star3 = true;
-          star4 = true;
-          star5 = true;
-          break;
-      }
-    }
-
-    double ancho = queryData.size.width;
-    return StatefulBuilder(
-      builder: (BuildContext context, setState) {
-        if (ancho > 760) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 70),
-            child: Row(
-              children: [
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = false;
-                          star3 = false;
-                          star4 = false;
-                          star5 = false;
-
-                          calificacion = '1';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star1
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = false;
-                          star4 = false;
-                          star5 = false;
-                          calificacion = '2';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star2
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = true;
-                          star4 = false;
-                          star5 = false;
-                          calificacion = '3';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star3
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = true;
-                          star4 = true;
-                          star5 = false;
-                          calificacion = '4';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star4
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = true;
-                          star4 = true;
-                          star5 = true;
-                          calificacion = '5';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star5
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-              ],
-            ),
-          );
-        } else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: [
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = false;
-                          star3 = false;
-                          star4 = false;
-                          star5 = false;
-
-                          calificacion = '1';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star1
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = false;
-                          star4 = false;
-                          star5 = false;
-                          calificacion = '2';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star2
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = true;
-                          star4 = false;
-                          star5 = false;
-                          calificacion = '3';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star3
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = true;
-                          star4 = true;
-                          star5 = false;
-                          calificacion = '4';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star4
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        if (opcion == '-1') {
-                          star1 = true;
-                          star2 = true;
-                          star3 = true;
-                          star4 = true;
-                          star5 = true;
-                          calificacion = '5';
-                          setState(() {});
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: star5
-                            ? Image.asset('assets/star_fill2.png')
-                            : Image.asset('assets/star2.png'),
-                      ),
-                    )),
-              ],
-            ),
-          );
-        }
-      },
-    );
-  }
-
   Future<http.Response> fetchIngredientes(String id) {
     return http.get(
       Uri.parse(
           'https://luisrojas24.pythonanywhere.com/get-ingredientes_platillo?id_Platillo=$id'),
     );
-  }
-
-  Future<http.Response> fetchCalificacion(
-      String idUser, String idPlatillo, String calificacion) {
-    return http.get(
-      Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/set-ranking?id_Usuario=$idUser&id_Platillo=$idPlatillo&ranking=$calificacion'),
-    );
-  }
-
-  Future<http.Response> fetchisCalificado(String idUser, String idPlatillo) {
-    return http.get(
-      Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/ranking-usr?id_Usuario=$idUser&id_Platillo=$idPlatillo'),
-    );
-  }
-
-  Future<http.Response> fetchRevisado(
-      String idUser, String idPlatillo, String calificacion) {
-    return http.get(
-      Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/set-revisado?id_Usuario=$idUser&id_Platillo=$idPlatillo'),
-    );
-  }
-
-  Future agregarCalificacion(String idPlatillo) async {
-    String? idUser = _auth.currentUser?.uid;
-    var response = await fetchCalificacion(idUser!, idPlatillo, calificacion);
-    return response;
-  }
-
-  Future agregarRevisado(String idPlatillo) async {
-    String? idUser = _auth.currentUser?.uid;
-    var response = await fetchRevisado(idUser!, idPlatillo, calificacion);
-    return response;
   }
 }
