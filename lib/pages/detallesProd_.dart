@@ -227,7 +227,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                             builder:
                                 (BuildContext context, AsyncSnapshot snapshot) {
                               if (snapshot.data != 'waiting') {
-                                return estrellas(snapshot.data);
+                                return estrellas(snapshot.data.body);
                               } else {
                                 return SizedBox();
                               }
@@ -277,40 +277,44 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 22)),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                  flex: 1,
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          if (cantidad > 1)
-                                            cantidad = cantidad - 1;
-                                        });
-                                      },
-                                      child:
-                                          Image.asset('assets/BotonMas.png'))),
-                              Flexible(
-                                  flex: 1,
-                                  child: Text('$cantidad',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.montserrat(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 40))),
-                              Flexible(
-                                  flex: 1,
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          if (cantidad < 10)
-                                            cantidad = cantidad + 1;
-                                        });
-                                      },
-                                      child: Image.asset(
-                                          'assets/BotonMenos.png'))),
-                            ],
+                          StatefulBuilder(
+                            builder: (BuildContext context, setState) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                      flex: 1,
+                                      child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              if (cantidad > 1)
+                                                cantidad = cantidad - 1;
+                                            });
+                                          },
+                                          child: Image.asset(
+                                              'assets/BotonMas.png'))),
+                                  Flexible(
+                                      flex: 1,
+                                      child: Text('$cantidad',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.montserrat(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 40))),
+                                  Flexible(
+                                      flex: 1,
+                                      child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              if (cantidad < 10)
+                                                cantidad = cantidad + 1;
+                                            });
+                                          },
+                                          child: Image.asset(
+                                              'assets/BotonMenos.png'))),
+                                ],
+                              );
+                            },
                           ),
                           SizedBox(
                             height: 10,
@@ -334,7 +338,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                               });
                               providerCarrito.setArticulos = articulos;
 
-                              await agregarCalificacion(id);
+                              agregarCalificacion(id);
                               Navigator.pushReplacementNamed(
                                   context, 'bottomBar');
                             },
@@ -447,7 +451,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        if (opcion != '-1') {
+                        if (opcion == '-1') {
                           star1 = true;
                           star2 = false;
                           star3 = false;
@@ -469,7 +473,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        if (opcion != '-1') {
+                        if (opcion == '-1') {
                           star1 = true;
                           star2 = true;
                           star3 = false;
@@ -490,7 +494,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        if (opcion != '-1') {
+                        if (opcion == '-1') {
                           star1 = true;
                           star2 = true;
                           star3 = true;
@@ -511,7 +515,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        if (opcion != '-1') {
+                        if (opcion == '-1') {
                           star1 = true;
                           star2 = true;
                           star3 = true;
@@ -532,7 +536,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        if (opcion != '-1') {
+                        if (opcion == '-1') {
                           star1 = true;
                           star2 = true;
                           star3 = true;
@@ -561,14 +565,16 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        star1 = true;
-                        star2 = false;
-                        star3 = false;
-                        star4 = false;
-                        star5 = false;
+                        if (opcion == '-1') {
+                          star1 = true;
+                          star2 = false;
+                          star3 = false;
+                          star4 = false;
+                          star5 = false;
 
-                        calificacion = '1';
-                        setState(() {});
+                          calificacion = '1';
+                          setState(() {});
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -581,13 +587,15 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        star1 = true;
-                        star2 = true;
-                        star3 = false;
-                        star4 = false;
-                        star5 = false;
-                        calificacion = '2';
-                        setState(() {});
+                        if (opcion == '-1') {
+                          star1 = true;
+                          star2 = true;
+                          star3 = false;
+                          star4 = false;
+                          star5 = false;
+                          calificacion = '2';
+                          setState(() {});
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -600,13 +608,15 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        star1 = true;
-                        star2 = true;
-                        star3 = true;
-                        star4 = false;
-                        star5 = false;
-                        calificacion = '3';
-                        setState(() {});
+                        if (opcion == '-1') {
+                          star1 = true;
+                          star2 = true;
+                          star3 = true;
+                          star4 = false;
+                          star5 = false;
+                          calificacion = '3';
+                          setState(() {});
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -619,13 +629,15 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        star1 = true;
-                        star2 = true;
-                        star3 = true;
-                        star4 = true;
-                        star5 = false;
-                        calificacion = '4';
-                        setState(() {});
+                        if (opcion == '-1') {
+                          star1 = true;
+                          star2 = true;
+                          star3 = true;
+                          star4 = true;
+                          star5 = false;
+                          calificacion = '4';
+                          setState(() {});
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -638,13 +650,15 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                     flex: 1,
                     child: InkWell(
                       onTap: () {
-                        star1 = true;
-                        star2 = true;
-                        star3 = true;
-                        star4 = true;
-                        star5 = true;
-                        calificacion = '5';
-                        setState(() {});
+                        if (opcion == '-1') {
+                          star1 = true;
+                          star2 = true;
+                          star3 = true;
+                          star4 = true;
+                          star5 = true;
+                          calificacion = '5';
+                          setState(() {});
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),

@@ -191,6 +191,8 @@ class _HomePageState extends State<HomePage> {
           .toList());
     }
 
+    print(acompaniamientos);
+
     if (data != null) {
       for (var acompaniamiento in acompaniamientos) {
         items.add(
@@ -579,46 +581,63 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data != 'waiting') {
               if (snapshot.data != null) {
-                return FutureBuilder(
-                  future: fetchPlatillos(),
-                  initialData: 'waiting',
-                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                    if (snapshot2.data != 'waiting') {
-                      if (snapshot2.data != null) {
-                        return CarouselSlider(
-                            items: itemsOtrosTambien(
-                                snapshot.data, snapshot2.data),
-                            options: CarouselOptions(
-                                height: 110,
-                                aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                                viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                                initialPage: 0,
-                                enableInfiniteScroll: false,
-                                reverse: false,
-                                autoPlay: false,
-                                autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 1000),
-                                autoPlayCurve: Curves.fastOutSlowIn,
-                                enlargeCenterPage: true,
-                                onPageChanged: (index, reason) {},
-                                scrollDirection: Axis.horizontal,
-                                disableCenter: true));
+                if (snapshot.data.body !=
+                    'Usuario sin información suficiente') {
+                  return FutureBuilder(
+                    future: fetchPlatillos(),
+                    initialData: 'waiting',
+                    builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                      if (snapshot2.data != 'waiting') {
+                        if (snapshot2.data != null) {
+                          return CarouselSlider(
+                              items: itemsOtrosTambien(
+                                  snapshot.data, snapshot2.data),
+                              options: CarouselOptions(
+                                  height: 110,
+                                  aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                                  viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: false,
+                                  reverse: false,
+                                  autoPlay: false,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 1000),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  onPageChanged: (index, reason) {},
+                                  scrollDirection: Axis.horizontal,
+                                  disableCenter: true));
+                        } else {
+                          return Center(
+                            child: Text('Uppss, el servidor se cayo',
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15)),
+                          );
+                        }
                       } else {
-                        return Center(
-                          child: Text('Uppss, el servidor se cayo',
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 15)),
-                        );
+                        return Center(child: loaderRecomendacion());
                       }
-                    } else {
-                      return Center(child: loaderRecomendacion());
-                    }
-                  },
-                );
+                    },
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 38.0, vertical: 20),
+                    child: Center(
+                      child: Text(
+                          'Estamos recabando datos, para ofrecerte una recomendación',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 15)),
+                    ),
+                  );
+                }
               } else {
                 return Center(
                   child: Text('Uppss, el servidor se cayo',
@@ -715,7 +734,7 @@ class _HomePageState extends State<HomePage> {
                         horizontal: 38.0, vertical: 20),
                     child: Center(
                       child: Text(
-                          'Estamo recabando datos, para ofrecerte una recomendación',
+                          'Estamos recabando datos, para ofrecerte una recomendación',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.montserrat(
                               color: Colors.white,
@@ -929,7 +948,7 @@ class _HomePageState extends State<HomePage> {
                       horizontal: 38.0, vertical: 20),
                   child: Center(
                     child: Text(
-                        'Estamo recabando datos, para ofrecerte una recomendación',
+                        'Estamos recabando datos, para ofrecerte una recomendación',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
@@ -1161,6 +1180,11 @@ class _HomePageState extends State<HomePage> {
             ),
             InkWell(
               onTap: () async {
+                final providerCarrito =
+                    Provider.of<CarritoProvider>(context, listen: false);
+                List<Map<String, dynamic>> clear = [];
+                providerCarrito.setArticulos = clear;
+                print('sale');
                 await signOut(context: context);
               },
               child: Padding(
@@ -1338,38 +1362,7 @@ class _HomePageState extends State<HomePage> {
     List<dynamic> posts = [];
     List<dynamic> articulos = providerCarrito.getArticulos;
     if (articulos.isNotEmpty) {
-      for (var i = 0; i < articulos.length; i++) {
-        http.Response request = await http.get(
-          Uri.parse(
-              'https://luisrojas24.pythonanywhere.com/get-asociaciones?id_platillo=${articulos[i]['id']}'),
-        );
-
-        List<dynamic> l = json.decode(request.body);
-
-//Primero 2 PLatillos Recomendados
-        for (var i = 0; i < 2; i++) {
-          var idPlatillo = l[i]
-              .toString()
-              .split(',')[0]
-              .split(':')[1]
-              .trim()
-              .replaceAll('.0', '');
-          var acompaniamiento = l[i]
-              .toString()
-              .split(',')[1]
-              .split(':')[1]
-              .trim()
-              .replaceAll('.0', '');
-          var asociacion = l[i]
-              .toString()
-              .split(',')[2]
-              .split(':')[1]
-              .trim()
-              .replaceAll('.0', '');
-
-          posts.contains(acompaniamiento) ? null : posts.add(acompaniamiento);
-        }
-      }
+      posts = await platillosRecomendados(posts, articulos.length, articulos);
 
       return posts;
     } else {
@@ -1380,27 +1373,62 @@ class _HomePageState extends State<HomePage> {
 
       Iterable l = json.decode(request.body);
 
-      var idPlatillo = l.first
-          .toString()
-          .split(',')[0]
-          .split(':')[1]
-          .trim()
-          .replaceAll('.0', '');
       var acompaniamiento = l.first
           .toString()
           .split(',')[1]
           .split(':')[1]
           .trim()
           .replaceAll('.0', '');
-      var asociacion = l.first
-          .toString()
-          .split(',')[2]
-          .split(':')[1]
-          .trim()
-          .replaceAll('.0', '');
 
-      posts.contains(acompaniamiento) ? null : posts.add(acompaniamiento);
+      posts.contains(acompaniamiento)
+          ? print('ya lo contiene')
+          : posts.add(acompaniamiento);
+      print('hola');
+      print(posts);
 
+      return posts;
+    }
+  }
+
+  Future<List> platillosRecomendados(
+      List posts, int length, List<dynamic> articulos) async {
+    for (var i = 0; i < length; i++) {
+      var request = await http.get(
+        Uri.parse(
+            'https://luisrojas24.pythonanywhere.com/get-asociaciones?id_platillo=${articulos[i]['id']}'),
+      );
+
+      if (!request.body.contains('<!DOCTYPE HTML')) {
+        List<dynamic> l = json.decode(request.body);
+
+        //Primero 2 PLatillos Recomendados
+
+        if (l.length > 2) {
+          for (var i = 0; i < 2; i++) {
+            var acompaniamiento = l[i]
+                .toString()
+                .split(',')[1]
+                .split(':')[1]
+                .trim()
+                .replaceAll('.0', '');
+
+            var nombreArticulos = articulos.map((e) => e['id']);
+            print('Nombre articulos: ');
+            print(nombreArticulos);
+            if (!nombreArticulos.contains(acompaniamiento)) {
+              posts.contains(acompaniamiento)
+                  ? print('ya lo contine')
+                  : posts.add(acompaniamiento);
+            }
+          }
+        }
+      }
+
+      print(posts);
+    }
+    if (posts.isEmpty) {
+      return [1];
+    } else {
       return posts;
     }
   }

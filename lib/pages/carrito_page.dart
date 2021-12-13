@@ -81,10 +81,20 @@ class _CarritoPageState extends State<CarritoPage> {
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: articulos.length,
                                 itemBuilder: (context, index) {
-                                  return cardProductoCar(
-                                      articulos[index]['nombre'],
-                                      articulos[index]['imagen'],
-                                      articulos[index]['cantidad']);
+                                  return Dismissible(
+                                    key: Key(articulos[index]['nombre']),
+                                    onDismissed: (direction) {
+                                      List<dynamic> articulos =
+                                          providerCarrito.getArticulos;
+                                      articulos.remove(articulos[index]);
+                                      providerCarrito.setArticulos = articulos;
+                                      setState(() {});
+                                    },
+                                    child: cardProductoCar(
+                                        articulos[index]['nombre'],
+                                        articulos[index]['imagen'],
+                                        articulos[index]['cantidad']),
+                                  );
                                 },
                               ),
                               getTotal() != 0
