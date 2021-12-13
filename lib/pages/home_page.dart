@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:rielera_app/interfaces/masComprados.interface.dart';
-import 'package:rielera_app/interfaces/recomendados.interface.dart';
+
 import 'package:rielera_app/providers/carritoProvider.dart';
 import 'package:rielera_app/providers/platilloProvider.dart';
 
@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     String? nombre = _auth.currentUser?.displayName?.toUpperCase();
+
     Random random = new Random();
     int randomNumber = random.nextInt(14) + 1;
 
@@ -163,11 +164,6 @@ class _HomePageState extends State<HomePage> {
                             thickness: 2,
                             color: Colors.black,
                           ),
-                          Text('Descripcion',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 12))
                         ],
                       ))
                 ],
@@ -242,11 +238,6 @@ class _HomePageState extends State<HomePage> {
                             thickness: 2,
                             color: Colors.black,
                           ),
-                          Text('Descripcion',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 12))
                         ],
                       ))
                 ],
@@ -271,12 +262,14 @@ class _HomePageState extends State<HomePage> {
             .split('->')[0]
             .replaceAll('{', '')
             .replaceAll('}', '')
+            .split(',')[0]
             .replaceAll('\'', '')
             .trim();
         String producto2 = juntos
             .split('->')[1]
             .replaceAll('{', '')
             .replaceAll('}', '')
+            .split(',')[0]
             .replaceAll('\'', '')
             .split(',')[0]
             .trim();
@@ -397,11 +390,6 @@ class _HomePageState extends State<HomePage> {
                             thickness: 2,
                             color: Colors.black,
                           ),
-                          Text('Descripcion',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 12))
                         ],
                       ))
                 ],
@@ -476,11 +464,6 @@ class _HomePageState extends State<HomePage> {
                             thickness: 2,
                             color: Colors.black,
                           ),
-                          Text('Descripcion',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 12))
                         ],
                       ))
                 ],
@@ -554,11 +537,6 @@ class _HomePageState extends State<HomePage> {
                             thickness: 2,
                             color: Colors.black,
                           ),
-                          Text('Descripcion',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 12))
                         ],
                       ))
                 ],
@@ -689,46 +667,63 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data != 'waiting') {
               if (snapshot.data != null) {
-                return FutureBuilder(
-                  future: fetchPlatillos(),
-                  initialData: 'waiting',
-                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                    if (snapshot2.data != 'waiting') {
-                      if (snapshot2.data != null) {
-                        return CarouselSlider(
-                            items: itemsTePuedeInteresar(
-                                snapshot.data, snapshot2.data),
-                            options: CarouselOptions(
-                                height: 110,
-                                aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                                viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                                initialPage: 0,
-                                enableInfiniteScroll: true,
-                                reverse: false,
-                                autoPlay: false,
-                                autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 1000),
-                                autoPlayCurve: Curves.fastOutSlowIn,
-                                enlargeCenterPage: true,
-                                onPageChanged: (index, reason) {},
-                                scrollDirection: Axis.horizontal,
-                                disableCenter: true));
+                if (snapshot.data.body !=
+                    '{"columns":[],"index":[],"data":[]}') {
+                  return FutureBuilder(
+                    future: fetchPlatillos(),
+                    initialData: 'waiting',
+                    builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                      if (snapshot2.data != 'waiting') {
+                        if (snapshot2.data != null) {
+                          return CarouselSlider(
+                              items: itemsTePuedeInteresar(
+                                  snapshot.data, snapshot2.data),
+                              options: CarouselOptions(
+                                  height: 110,
+                                  aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                                  viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: true,
+                                  reverse: false,
+                                  autoPlay: false,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 1000),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  onPageChanged: (index, reason) {},
+                                  scrollDirection: Axis.horizontal,
+                                  disableCenter: true));
+                        } else {
+                          return Center(
+                            child: Text('Uppss, el servidor se cayo',
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15)),
+                          );
+                        }
                       } else {
-                        return Center(
-                          child: Text('Uppss, el servidor se cayo',
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 15)),
-                        );
+                        return loaderRecomendacion();
                       }
-                    } else {
-                      return loaderRecomendacion();
-                    }
-                  },
-                );
+                    },
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 38.0, vertical: 20),
+                    child: Center(
+                      child: Text(
+                          'Estamo recabando datos, para ofrecerte una recomendación',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 15)),
+                    ),
+                  );
+                }
               } else {
                 return Center(
                   child: Text('Uppss, el servidor se cayo',
@@ -811,7 +806,7 @@ class _HomePageState extends State<HomePage> {
                                       viewportFraction:
                                           ancho < 1000 ? 0.8 : 0.4,
                                       initialPage: 0,
-                                      enableInfiniteScroll: true,
+                                      enableInfiniteScroll: false,
                                       reverse: false,
                                       autoPlay: false,
                                       autoPlayInterval: Duration(seconds: 3),
@@ -887,46 +882,62 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.data != 'waiting') {
             if (snapshot.data != null) {
-              return FutureBuilder(
-                future: fetchPlatillos(),
-                initialData: 'waiting',
-                builder: (BuildContext context, AsyncSnapshot snapshot2) {
-                  if (snapshot2.data != 'waiting') {
-                    if (snapshot2.data != null) {
-                      return CarouselSlider(
-                          items:
-                              itemsListVanJuntos(snapshot.data, snapshot2.data),
-                          options: CarouselOptions(
-                              height: 110,
-                              aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
-                              viewportFraction: ancho < 1000 ? 0.8 : 0.4,
-                              initialPage: 0,
-                              enableInfiniteScroll: true,
-                              reverse: false,
-                              autoPlay: false,
-                              autoPlayInterval: Duration(seconds: 3),
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 1000),
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enlargeCenterPage: true,
-                              onPageChanged: (index, reason) {},
-                              scrollDirection: Axis.horizontal,
-                              disableCenter: true));
+              if (snapshot.data.body != "[]") {
+                return FutureBuilder(
+                  future: fetchPlatillos(),
+                  initialData: 'waiting',
+                  builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                    if (snapshot2.data != 'waiting') {
+                      if (snapshot2.data != null) {
+                        return CarouselSlider(
+                            items: itemsListVanJuntos(
+                                snapshot.data, snapshot2.data),
+                            options: CarouselOptions(
+                                height: 110,
+                                aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                                viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                                initialPage: 0,
+                                enableInfiniteScroll: false,
+                                reverse: false,
+                                autoPlay: false,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 1000),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                onPageChanged: (index, reason) {},
+                                scrollDirection: Axis.horizontal,
+                                disableCenter: true));
+                      } else {
+                        return Center(
+                          child: Text('Uppss, el servidor se cayo',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15)),
+                        );
+                      }
                     } else {
-                      return Center(
-                        child: Text('Uppss, el servidor se cayo',
-                            textAlign: TextAlign.start,
-                            style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15)),
-                      );
+                      return loaderRecomendacion();
                     }
-                  } else {
-                    return loaderRecomendacion();
-                  }
-                },
-              );
+                  },
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 38.0, vertical: 20),
+                  child: Center(
+                    child: Text(
+                        'Estamo recabando datos, para ofrecerte una recomendación',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15)),
+                  ),
+                );
+              }
             } else {
               return Center(
                 child: Text('Uppss, el servidor se cayo',
@@ -1118,13 +1129,13 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('BIENVENIDO',
+                Text('BIENVENID@',
                     textAlign: TextAlign.start,
                     style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontWeight: FontWeight.w200,
                         fontSize: 30)),
-                Text(nombre ?? 'AMIGO',
+                Text(nombre!.split(' ')[0] + nombre!.split(' ')[1] ?? 'AMIGO',
                     textAlign: TextAlign.start,
                     style: GoogleFonts.montserrat(
                         color: Colors.white,
@@ -1168,7 +1179,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<String> getCategoriaRndom(int randomNumber) async {
     final response = await fetchCategorias(context);
-    print(response.body);
+
     List<dynamic> json = jsonDecode(response.body);
     String recomendados = json[randomNumber - 1]['Nombre_categoria'];
 
@@ -1176,9 +1187,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Widget> itemsLoader() {
-    MediaQueryData queryData = MediaQuery.of(context);
-    double ancho = queryData.size.width;
-
     List<Widget> card = [];
 
     for (var i = 0; i < 5; i++) {
@@ -1279,9 +1287,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<http.Response> fetchTePuedeInteresar(BuildContext context) {
+    String? id = _auth.currentUser?.uid;
     return http.get(
       Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/rec_content_based?id_Usuario=114518122078180188707'),
+          'https://luisrojas24.pythonanywhere.com/rec_content_based?id_Usuario=$id'),
     );
   }
 
@@ -1293,9 +1302,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<http.Response> fetchOtrosTambien(randomNumber) {
+    String? id = _auth.currentUser?.uid;
     return http.get(
       Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/rec_colab_item?id_Usuario=101994360380017395432'),
+          'https://luisrojas24.pythonanywhere.com/rec_colab_item?id_Usuario=$id'),
     );
   }
 

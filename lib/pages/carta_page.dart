@@ -120,7 +120,7 @@ class _CartaDigitalPageState extends State<CartaDigitalPage> {
                   } else {
                     if (snapshot.data != null) {
                       List<dynamic> list = json.decode(snapshot.data.body);
-                      print(list);
+
                       return CustomRadioButton(
                         elevation: 0,
                         radius: 500,
@@ -146,7 +146,6 @@ class _CartaDigitalPageState extends State<CartaDigitalPage> {
                                 fontWeight: FontWeight.w200,
                                 fontSize: 14)),
                         radioButtonValue: (value) {
-                          print(value);
                           filterCard = value.toString();
                           setState(() {});
                         },
@@ -535,11 +534,10 @@ class _CartaDigitalPageState extends State<CartaDigitalPage> {
 }
 
 Future<http.Response> fetchPlatillos() async {
-  print('HOLA');
   var response = await http.get(
     Uri.parse('https://luisrojas24.pythonanywhere.com/get-platillos'),
   );
-  print(response.body);
+
   return response;
 }
 
@@ -547,6 +545,6 @@ Future<http.Response> fetchCateogorias() async {
   var response = await http.get(
     Uri.parse('https://luisrojas24.pythonanywhere.com/get-categorias'),
   );
-  print(response.body);
+
   return response;
 }

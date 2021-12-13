@@ -242,8 +242,6 @@ class _CarritoPageState extends State<CarritoPage> {
           'Platillo:${item['nombre']}\n Cantidad:${item['cantidad']}\n\n';
     }
 
-    print(dataQR);
-
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -345,11 +343,15 @@ class _CarritoPageState extends State<CarritoPage> {
 
     String platillos = '';
 
-    for (var item in articulos) {
-      platillos = platillos + '${item['nombre']}*${item['cantidad']},';
+    for (var i = 0; i < articulos.length; i++) {
+      if (i == articulos.length - 1) {
+        platillos =
+            platillos + '${articulos[i]['nombre']}*${articulos[i]['cantidad']}';
+      } else {
+        platillos = platillos +
+            '${articulos[i]['nombre']}*${articulos[i]['cantidad']},';
+      }
     }
-
-    print(platillos.replaceAll(' ', '_'));
 
     String dataQR = '';
 
@@ -358,18 +360,17 @@ class _CarritoPageState extends State<CarritoPage> {
           'Platillo:${item['nombre']}\n Cantidad:${item['cantidad']}\n\n';
     }
 
-    print(dataQR);
-
     var response =
         await fetchGenerarOrden(id, platillos.replaceAll(' ', '_'), dataQR);
-    print(response);
   }
 
   Future<http.Response> fetchGenerarOrden(
       String? id, String platillos, String dataQR) {
-    return http.get(
+    var response = http.get(
       Uri.parse(
           'https://luisrojas24.pythonanywhere.com/set-orden?id_Usuario=${id}&Platillos=${platillos}&qr=${dataQR}'),
     );
+
+    return response;
   }
 }

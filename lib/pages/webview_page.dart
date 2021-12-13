@@ -22,7 +22,7 @@ class _WebviewPageState extends State<WebviewPage> {
       child: Scaffold(
         body: Column(
           children: [
-           /*  FutureBuilder(
+            /*  FutureBuilder(
               future: permisos(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
@@ -54,9 +54,9 @@ class _WebviewPageState extends State<WebviewPage> {
             ), */
             InkWell(
               onTap: () async {
-               /*  await Permission.camera.request();
+                /*  await Permission.camera.request();
                 await Permission.microphone.request(); */
-                print('Helo');
+
                 setState(() {});
               },
               child: Container(
@@ -71,7 +71,7 @@ class _WebviewPageState extends State<WebviewPage> {
     );
   }
 
- /*  Future permisos() async {
+  /*  Future permisos() async {
     await Permission.camera.request();
     await Permission.microphone.request();
     return Permission.camera.isGranted;

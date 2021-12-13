@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -179,7 +181,6 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: () async {
                               var userCredencial =
                                   await signInWithGoogle(context: context);
-                              print(userCredencial);
                             },
                             child: Image.asset('assets/signGoogle.png')),
                       )
@@ -244,10 +245,13 @@ class _LoginPageState extends State<LoginPage> {
     return user;
   }
 
-  Future<http.Response> guardarUser(String uid) {
-    return http.get(
+  Future<http.Response> guardarUser(String uid) async {
+    var response = await http.get(
       Uri.parse(
           'https://luisrojas24.pythonanywhere.com/set-usuario?id_Usuario=$uid'),
     );
+
+    print(response.body.toString());
+    return response;
   }
 }

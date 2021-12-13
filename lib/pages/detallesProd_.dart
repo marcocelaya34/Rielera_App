@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -31,6 +32,8 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
   String descripcion = '';
   var categoria = '';
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     star1 = false;
@@ -57,6 +60,8 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
       Navigator.pushReplacementNamed(context, 'bottomBar');
       return true;
     }
+
+    agregarRevisado(id);
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -201,8 +206,6 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                                           ', ' +
                                           e['Nombre_ingrediente'];
                                     }
-
-                                    print(e);
                                   }).toList();
                                   return Text(descripcion,
                                       textAlign: TextAlign.left,
@@ -545,9 +548,8 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                             height: 10,
                           ),
                           InkWell(
-                            onTap: () {
+                            onTap: () async {
                               Provider.of<BarProvider>(context, listen: false);
-                              print(providerBar.getPosicion);
 
                               final providerCarrito =
                                   Provider.of<CarritoProvider>(context,
@@ -564,6 +566,7 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
                               });
                               providerCarrito.setArticulos = articulos;
 
+                              await agregarCalificacion(id);
                               Navigator.pushReplacementNamed(
                                   context, 'bottomBar');
                             },
@@ -620,5 +623,33 @@ class _DetallesProdPageState extends State<DetallesProdPage> {
       Uri.parse(
           'https://luisrojas24.pythonanywhere.com/get-ingredientes_platillo?id_Platillo=$id'),
     );
+  }
+
+  Future<http.Response> fetchCalificacion(
+      String idUser, String idPlatillo, String calificacion) {
+    return http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/set-ranking?id_Usuario=$idUser&id_Platillo=$idPlatillo&ranking=$calificacion'),
+    );
+  }
+
+  Future<http.Response> fetchRevisado(
+      String idUser, String idPlatillo, String calificacion) {
+    return http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/set-revisado?id_Usuario=$idUser&id_Platillo=$idPlatillo'),
+    );
+  }
+
+  Future agregarCalificacion(String idPlatillo) async {
+    String? idUser = _auth.currentUser?.uid;
+    var response = await fetchCalificacion(idUser!, idPlatillo, calificacion);
+    return response;
+  }
+
+  Future agregarRevisado(String idPlatillo) async {
+    String? idUser = _auth.currentUser?.uid;
+    var response = await fetchRevisado(idUser!, idPlatillo, calificacion);
+    return response;
   }
 }
