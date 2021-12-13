@@ -146,6 +146,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_lints",
+      "rootUri": "file:///Users/marco/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_snake_navigationbar",
       "rootUri": "file:///Users/marco/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_snake_navigationbar-0.5.0",
       "packageUri": "lib/",
@@ -226,6 +232,12 @@
     {
       "name": "line_icons",
       "rootUri": "file:///Users/marco/development/flutter/.pub-cache/hosted/pub.dartlang.org/line_icons-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///Users/marco/development/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -488,7 +500,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-12-12T07:58:58.225360Z",
+  "generated": "2021-12-13T17:50:36.866989Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

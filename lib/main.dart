@@ -4,32 +4,30 @@ import 'package:flutter/material.dart';
 /* import 'package:permission_handler/permission_handler.dart'; */
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:rielera_app/pages/bottonBar_page.dart';
-import 'package:rielera_app/pages/carrito_page.dart';
-import 'package:rielera_app/pages/carta_page.dart';
-import 'package:rielera_app/pages/detallesProd_%20copy%202.dart';
-import 'package:rielera_app/pages/detallesProd_%20copy%203.dart';
-import 'package:rielera_app/pages/detallesProd_%20RA.dart';
-import 'package:rielera_app/pages/detallesProd_.dart';
-import 'package:rielera_app/pages/home_page.dart';
-import 'package:rielera_app/pages/infoNutri_RA_page.dart';
-import 'package:rielera_app/pages/infoNutri_page.dart';
-import 'package:rielera_app/pages/login_page.dart';
-import 'package:rielera_app/pages/pedidos_page.dart';
-import 'package:rielera_app/pages/webview_page.dart';
-import 'package:rielera_app/providers/carritoProvider.dart';
-import 'package:rielera_app/providers/barProvider.dart';
-import 'package:rielera_app/providers/platilloProvider.dart';
+import 'package:rielera_app/pages/bottonBar.page.dart';
+import 'package:rielera_app/pages/carrito.page.dart';
+import 'package:rielera_app/pages/carta.page.dart';
+import 'package:rielera_app/pages/detallesProd.page.dart';
+import 'package:rielera_app/pages/home.page.dart';
+import 'package:rielera_app/pages/infoNutri.page.dart';
+import 'package:rielera_app/pages/login.page.dart';
+import 'package:rielera_app/pages/pedidos.page.dart';
+import 'package:rielera_app/pages/pedidos.page.dart';
+import 'package:rielera_app/providers/carrito.provider.dart';
+import 'package:rielera_app/providers/bar.provider.dart';
+import 'package:rielera_app/providers/platillo.provider.dart';
 
 Future main() async {
   if (!kIsWeb) {
     WidgetsFlutterBinding.ensureInitialized();
   }
   await Firebase?.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
 
   @override
@@ -42,15 +40,19 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           builder: (context, widget) => ResponsiveWrapper.builder(
-            MainApp(),
+            const MainApp(),
             maxWidth: double.maxFinite,
             minWidth: 480,
             defaultScale: true,
             breakpoints: [
-              ResponsiveBreakpoint.resize(300, name: MOBILE, scaleFactor: 1),
-              ResponsiveBreakpoint.resize(500, name: MOBILE, scaleFactor: 1),
-              ResponsiveBreakpoint.resize(750, name: TABLET, scaleFactor: 1),
-              ResponsiveBreakpoint.resize(1000, name: DESKTOP, scaleFactor: 1),
+              const ResponsiveBreakpoint.resize(300,
+                  name: MOBILE, scaleFactor: 1),
+              const ResponsiveBreakpoint.resize(500,
+                  name: MOBILE, scaleFactor: 1),
+              const ResponsiveBreakpoint.resize(750,
+                  name: TABLET, scaleFactor: 1),
+              const ResponsiveBreakpoint.resize(1000,
+                  name: DESKTOP, scaleFactor: 1),
             ],
           ),
           debugShowCheckedModeBanner: false,
@@ -67,19 +69,14 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: 'loginPage',
       routes: {
-        'loginPage': (BuildContext context) => LoginPage(),
-        'bottomBar': (BuildContext context) => BottomBarPage(),
-        'homePage': (BuildContext context) => HomePage(),
-        'cartaPage': (BuildContext context) => CartaDigitalPage(),
-        'detallesProd': (BuildContext context) => DetallesProdPage(),
-        'detallesProdRA': (BuildContext context) => DetallesProdPageRA(),
-        'detallesProd2': (BuildContext context) => DetallesProdPage2(),
-        'detallesProd3': (BuildContext context) => DetallesProdPage3(),
-        'infoNutri': (BuildContext context) => InfoNutriPage(),
-        'infoNutriRA': (BuildContext context) => InfoNutriPageRA(),
-        'carrito': (BuildContext context) => CarritoPage(),
-        'pedidos': (BuildContext context) => PedidosPage(),
-        'webview': (BuildContext context) => WebviewPage(),
+        'loginPage': (BuildContext context) => const LoginPage(),
+        'bottomBar': (BuildContext context) => const BottomBarPage(),
+        'homePage': (BuildContext context) => const HomePage(),
+        'cartaPage': (BuildContext context) => const CartaDigitalPage(),
+        'detallesProd': (BuildContext context) => const DetallesProdPage(),
+        'infoNutri': (BuildContext context) => const InfoNutriPage(),
+        'carrito': (BuildContext context) => const CarritoPage(),
+        'pedidos': (BuildContext context) => const PedidosPage(),
       },
     );
   }

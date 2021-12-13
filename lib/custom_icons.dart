@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/Custom.ttf
 ///
-/// 
+///
 /// * Material Design Icons, Copyright (C) Google, Inc
 ///         Author:    Google
 ///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
@@ -33,10 +33,16 @@ class Custom {
   static const _kFontFam = 'Custom';
   static const String? _kFontPkg = null;
 
-  static const IconData home = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData shopping_cart = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData down_open = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData search = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData knife_fork = IconData(0xea18, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData list_bullet = IconData(0xf0ca, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData shoppingCart =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData downOpen =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData search =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData knifeFork =
+      IconData(0xea18, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData listBullet =
+      IconData(0xf0ca, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
