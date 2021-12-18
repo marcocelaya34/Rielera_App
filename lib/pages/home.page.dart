@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:rielera_app/interfaces/infoNut.interface.dart';
 import 'package:rielera_app/interfaces/masComprados.interface.dart';
 
 import 'package:rielera_app/providers/carrito.provider.dart';
@@ -78,8 +79,9 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 30,
                 ),
+                infoNutri('Grasas'),
                 const SizedBox(
-                  height: 100,
+                  height: 140,
                 ),
               ],
             ),
@@ -278,10 +280,13 @@ class _HomePageState extends State<HomePage> {
             .split(',')[0]
             .trim();
 
-        List<String> secondCompare = [producto1, producto2];
-        bool comparacion = vanjuntosPareja
-            .any((element) => listEquals(element, secondCompare));
-        if (!comparacion) {
+        List<String> secondCompare1 = [producto1, producto2];
+        List<String> secondCompare2 = [producto2, producto1];
+        bool comparacion1 = vanjuntosPareja
+            .any((element) => listEquals(element, secondCompare1));
+        bool comparacion2 = vanjuntosPareja
+            .any((element) => listEquals(element, secondCompare2));
+        if (!comparacion1 && !comparacion2) {
           vanjuntosPareja.add([producto1, producto2]);
           List<dynamic> imagen1 = platillo
               .where((element) => element['Nombre_platillo'] == producto1)
@@ -333,6 +338,77 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }
+      }
+    }
+
+    return items;
+  }
+
+  List<Widget> itemsInfoNutri(List<InfoNutri> data, dynamic platillos) {
+    List<Widget> items = [];
+
+    List<dynamic> platillo = jsonDecode(platillos.body);
+    List<dynamic> acompaniamientos = [];
+    for (var i = 0; i < 4; i++) {
+      acompaniamientos.add(platillo
+          .where((element) => element['id_Platillo'] == data[i].id_Platillo)
+          .toList());
+    }
+
+    if (data != null) {
+      for (var acompaniamiento in acompaniamientos) {
+        items.add(
+          InkWell(
+            onTap: () {
+              final providerPlatillo =
+                  Provider.of<PlatilloProvider>(context, listen: false);
+
+              providerPlatillo.setId =
+                  acompaniamiento[0]['id_Platillo'].toString();
+              providerPlatillo.setNombre =
+                  acompaniamiento[0]['Nombre_platillo'];
+              providerPlatillo.setDescripcion = 'descripcion';
+              providerPlatillo.setImagen = acompaniamiento[0]['Video_RA'];
+              providerPlatillo.setCategoria =
+                  acompaniamiento[0]['id_Categoria'].toString();
+
+              Navigator.pushReplacementNamed(context, 'detallesProd');
+            },
+            child: Container(
+              width: 300,
+              padding: const EdgeInsets.only(left: 0, right: 5, top: 10),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                children: [
+                  Flexible(
+                      flex: 2,
+                      child: Center(
+                          child:
+                              Image.network(acompaniamiento[0]['Video_RA']))),
+                  Flexible(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(acompaniamiento[0]['Nombre_platillo'],
+                              textAlign: TextAlign.start,
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15)),
+                          const Divider(
+                            endIndent: 50,
+                            thickness: 2,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ))
+                ],
+              ),
+            ),
+          ),
+        );
       }
     }
 
@@ -572,7 +648,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('A OTROS TAMBIÉN LES GUSTÓ',
+              Text('A OTROS COMO TÚ, LES GUSTÓ',
                   style: GoogleFonts.montserrat(
                       color: Colors.white,
                       fontWeight: FontWeight.w200,
@@ -1087,6 +1163,91 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget infoNutri(String tipo) {
+    MediaQueryData queryData = MediaQuery.of(context);
+    double ancho = queryData.size.width;
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.only(left: 30),
+          alignment: Alignment.centerLeft,
+          width: double.maxFinite,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('CON MENOS ${tipo.toUpperCase()}',
+                  style: GoogleFonts.montserrat(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w200,
+                      fontSize: 16)),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
+        FutureBuilder(
+          future: fetchInfoNutri(tipo),
+          initialData: 'waiting',
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data == 'waiting') {
+              return loaderRecomendacion();
+            } else if (snapshot.data != null) {
+              return FutureBuilder(
+                future: fetchPlatillos(),
+                initialData: 'waiting',
+                builder: (BuildContext context, AsyncSnapshot snapshot2) {
+                  if (snapshot2.data != 'waiting') {
+                    if (snapshot2.data != null) {
+                      return CarouselSlider(
+                          items: itemsInfoNutri(snapshot.data, snapshot2.data),
+                          options: CarouselOptions(
+                              height: 110,
+                              aspectRatio: ancho < 1000 ? 16 / 9 : 4 / 3,
+                              viewportFraction: ancho < 1000 ? 0.8 : 0.4,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: false,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 1000),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              onPageChanged: (index, reason) {},
+                              scrollDirection: Axis.horizontal,
+                              disableCenter: true));
+                    } else {
+                      return Center(
+                        child: Text('Uppss, el servidor se cayo',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15)),
+                      );
+                    }
+                  } else {
+                    return loaderRecomendacion();
+                  }
+                },
+              );
+            } else {
+              return Center(
+                child: Text('Uppss, el servidor se cayo',
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.montserrat(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15)),
+              );
+            }
+          },
+        ),
+      ],
+    );
+  }
+
   Widget recomendaciones() {
     MediaQueryData queryData = MediaQuery.of(context);
     double ancho = queryData.size.width;
@@ -1378,6 +1539,21 @@ class _HomePageState extends State<HomePage> {
     return posts;
   }
 
+  Future<dynamic> fetchInfoNutri(String tipo) async {
+    List<InfoNutri> posts = [];
+
+    http.Response request = await http.get(
+      Uri.parse(
+          'https://luisrojas24.pythonanywhere.com/get-platillos_saludables?Etiqueta=$tipo'),
+    );
+
+    Iterable l = json.decode(request.body);
+
+    posts.addAll(l.map((model) => InfoNutri.fromJson(model)));
+
+    return posts;
+  }
+
   Future<http.Response> fetchPlatillos() {
     return http.get(
       Uri.parse('https://luisrojas24.pythonanywhere.com/get-platillos'),
@@ -1453,4 +1629,6 @@ class _HomePageState extends State<HomePage> {
       return posts;
     }
   }
+
+  nutriCategoria(String s) {}
 }

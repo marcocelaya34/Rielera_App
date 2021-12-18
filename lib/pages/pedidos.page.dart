@@ -72,6 +72,16 @@ class _PedidosPageState extends State<PedidosPage> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data == 'waiting') {
                       return loaderPedidos();
+                    } else if (snapshot.data.body.contains('<!DOCTYPE HTML')) {
+                      return Center(
+                        child: Text(
+                            'Recarga la pagina, el servidor esta arrancando',
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15)),
+                      );
                     } else if (snapshot.data != null) {
                       List<dynamic> ordenes = json.decode(snapshot.data.body);
                       List<List<dynamic>> pedidos = [];
@@ -183,7 +193,15 @@ class _PedidosPageState extends State<PedidosPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(fecha[0] + fecha[1] + fecha[2] + fecha[3],
+                              Text(
+                                  fecha.length > 4
+                                      ? fecha[1] +
+                                          ' ' +
+                                          fecha[2] +
+                                          '.' +
+                                          ' ' +
+                                          fecha[3]
+                                      : '',
                                   style: GoogleFonts.montserrat(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
@@ -201,7 +219,12 @@ class _PedidosPageState extends State<PedidosPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(fecha[4],
+                              Text(
+                                  fecha.length > 5
+                                      ? fecha[4].split(':')[0] +
+                                          ':' +
+                                          fecha[4].split(':')[1]
+                                      : '',
                                   style: GoogleFonts.montserrat(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,

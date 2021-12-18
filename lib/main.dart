@@ -12,7 +12,6 @@ import 'package:rielera_app/pages/home.page.dart';
 import 'package:rielera_app/pages/infoNutri.page.dart';
 import 'package:rielera_app/pages/login.page.dart';
 import 'package:rielera_app/pages/pedidos.page.dart';
-import 'package:rielera_app/pages/pedidos.page.dart';
 import 'package:rielera_app/providers/carrito.provider.dart';
 import 'package:rielera_app/providers/bar.provider.dart';
 import 'package:rielera_app/providers/platillo.provider.dart';

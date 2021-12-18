@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:rielera_app/providers/carrito.provider.dart';
@@ -370,9 +371,15 @@ class _CarritoPageState extends State<CarritoPage> {
 
   Future<http.Response> fetchGenerarOrden(
       String? id, String platillos, String dataQR) {
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    var formatter2 = DateFormat('Hm');
+    var fecha = formatter.format(now);
+    var hora = formatter2.format(now);
+
     var response = http.get(
       Uri.parse(
-          'https://luisrojas24.pythonanywhere.com/set-orden?id_Usuario=$id&Platillos=$platillos&qr=$dataQR'),
+          'https://luisrojas24.pythonanywhere.com/set-orden?id_Usuario=$id&Platillos=$platillos&qr=$dataQR&Fecha=$fecha&Hora=$hora'),
     );
 
     return response;

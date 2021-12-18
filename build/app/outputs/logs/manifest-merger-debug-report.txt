@@ -96,9 +96,9 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/marc
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] /Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from /Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:4:9-36
+		ADDED from /Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:4:9-35
 	android:icon
-		ADDED from /Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:5:9-43
+		ADDED from /Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:5:9-45
 activity#com.example.rielera_app.MainActivity
 ADDED from /Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:6:9-34:20
 	android:launchMode

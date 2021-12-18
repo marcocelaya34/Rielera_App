@@ -24,10 +24,10 @@
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 19-->[androidx.core:core:1.1.0] /Users/marco/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/AndroidManifest.xml:24:18-86
 20        android:debuggable="true"
-21        android:icon="@mipmap/ic_launcher"
-21-->/Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:5:9-43
-22        android:label="rielera_app" >
-22-->/Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:4:9-36
+21        android:icon="@mipmap/launcher_icon"
+21-->/Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:5:9-45
+22        android:label="RieleraApp" >
+22-->/Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:4:9-35
 23        <activity
 23-->/Users/marco/Documents/GitHub/Rielera_App/android/app/src/main/AndroidManifest.xml:6:9-34:20
 24            android:name="com.example.rielera_app.MainActivity"
